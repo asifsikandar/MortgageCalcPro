@@ -233,7 +233,7 @@
         <div class="relative" id="calc-hub-wrapper">
           <button id="calc-hub-btn" aria-label="Calculator Hub" aria-expanded="false"
             class="flex items-center gap-1.5 px-3.5 py-2 text-sm font-600 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20">
-            <i class="fa-solid fa-grid-2 text-primary-600"></i>
+            <i class="fa-solid fa-border-all text-primary-600"></i>
             <span>Calculators</span>
             <i class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-200" id="hub-chevron"></i>
           </button>
@@ -295,9 +295,8 @@
           <i class="fa-solid fa-chart-line text-xs"></i> Get Today's Rates
         </a>
         <!-- Mobile Calculator Hub trigger -->
-        <button id="calc-hub-mobile-btn" aria-label="Calculator Hub" class="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative">
-          <i class="fa-solid fa-grid-2 text-primary-600"></i>
-          <span class="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-primary-600 rounded-full text-white flex items-center justify-center" style="font-size:8px;font-weight:700">18</span>
+        <button id="calc-hub-mobile-btn" aria-label="Calculator Hub" class="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          <i class="fa-solid fa-border-all text-primary-600"></i>
         </button>
         <button id="hamburger" aria-label="Open menu" class="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
           <i class="fa-solid fa-bars"></i>
@@ -1811,31 +1810,60 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================
-// ROUTER
+// ROUTER — History API-based SPA routing
 // ============================================================
 let currentPage = 'home';
-function navigateTo(page, anchor) {
-  // Hide all pages
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  // Show target
+
+function _showPage(page, anchor) {
+  // Guard: default to home if page element missing
   const target = document.getElementById('page-' + page);
-  if (target) target.classList.add('active');
+  if (!target) { page = 'home'; }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
   currentPage = page;
-  // Update nav active state
+  // Sync nav underline
   document.querySelectorAll('[data-nav]').forEach(a => a.classList.remove('active'));
   const activeLink = document.querySelector(`[data-nav="${page}"]`);
   if (activeLink) activeLink.classList.add('active');
-  // Scroll
+  // Scroll to top, then optionally to anchor
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Scroll to anchor after short delay
   if (anchor) {
     setTimeout(() => {
       const el = document.getElementById(anchor);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    }, 120);
   }
+}
+
+function navigateTo(page, anchor) {
+  // Push a history entry so Back/Forward work
+  const state = { page: page || 'home', anchor: anchor || null };
+  const hash = anchor ? `#${page}/${anchor}` : `#${page}`;
+  history.pushState(state, '', hash);
+  _showPage(state.page, state.anchor);
   return false;
 }
+
+// Handle browser Back / Forward
+window.addEventListener('popstate', (e) => {
+  if (e.state && e.state.page) {
+    _showPage(e.state.page, e.state.anchor);
+  } else {
+    // Parse hash as fallback
+    const hash = location.hash.replace('#','');
+    const [pg, anc] = hash.split('/');
+    _showPage(pg || 'home', anc || null);
+  }
+});
+
+// Initialise URL on first load (replace so it doesn't add a back-entry)
+(function initRoute() {
+  const hash = location.hash.replace('#','');
+  const [pg, anc] = hash.split('/');
+  const initPage = pg && document.getElementById('page-' + pg) ? pg : 'home';
+  history.replaceState({ page: initPage, anchor: anc || null }, '', initPage === 'home' && !anc ? location.pathname : '#' + (anc ? `${initPage}/${anc}` : initPage));
+  _showPage(initPage, anc || null);
+})();
 
 // ============================================================
 // MORTGAGE CALCULATOR
@@ -2222,7 +2250,9 @@ function filterBlog() {
 </script>
 <script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
 <script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
+<script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
 </body>
+
 
 
 </html>
