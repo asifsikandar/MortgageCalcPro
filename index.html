@@ -1,26 +1,28 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth"><head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MortgageCalc Pro – Calculate Your Mortgage Payment Instantly</title>
-  <meta name="description" content="Free mortgage calculator. Estimate your monthly payment including principal, interest, taxes, insurance, PMI, and HOA fees. Updated daily with accurate rates."/>
-  <meta property="og:title" content="MortgageCalc Pro – Mortgage Calculator"/>
-  <meta property="og:description" content="Calculate your mortgage payment in seconds. Free, accurate, and updated daily."/>
-  <meta property="og:url" content="https://www.onspace.ai"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:site_name" content="OnSpace.AI"/>
-  <meta property="og:image" content="https://cdn-ai.onspace.ai/onspace/project/screenshot/online/pre-site/9bikgs.jpg"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="MortgageCalc Pro – Mortgage Calculator"/>
-  <meta name="twitter:description" content="Calculate your mortgage payment in seconds."/>
-  <meta name="twitter:image" content="https://cdn-ai.onspace.ai/onspace/project/screenshot/online/pre-site/9bikgs.jpg"/>
-  <meta name="twitter:url" content="https://www.onspace.ai"/>
+  <meta name="description" content="Free mortgage calculator. Estimate your monthly payment including principal, interest, taxes, insurance, PMI, and HOA fees. Updated daily with accurate rates." />
+  <meta property="og:title" content="MortgageCalc Pro – Mortgage Calculator" />
+  <meta property="og:description" content="Calculate your mortgage payment in seconds. Free, accurate, and updated daily." />
+  <meta property="og:url" content="https://www.onspace.ai" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="OnSpace.AI" />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=MortgageCalc+Pro" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MortgageCalc Pro – Mortgage Calculator" />
+  <meta name="twitter:description" content="Calculate your mortgage payment in seconds." />
+  <meta name="twitter:image" content="https://via.placeholder.com/1200x630.png?text=MortgageCalc+Pro" />
+  <meta name="twitter:url" content="https://www.onspace.ai" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -76,6 +78,35 @@
     #mobile-drawer.open { transform: translateX(0); }
     #drawer-overlay { transition: opacity 0.3s ease; opacity:0; pointer-events:none; }
     #drawer-overlay.open { opacity:1; pointer-events:all; }
+
+    /* Calculator Hub Dropdown */
+    #calc-hub-dropdown {
+      opacity:0; transform:translateY(-8px) scale(0.97); pointer-events:none;
+      transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+    #calc-hub-dropdown.open {
+      opacity:1; transform:translateY(0) scale(1); pointer-events:all;
+    }
+    /* Mobile calc overlay */
+    #calc-hub-mobile-overlay {
+      opacity:0; pointer-events:none;
+      transition: opacity 0.25s ease;
+    }
+    #calc-hub-mobile-overlay.open { opacity:1; pointer-events:all; }
+    #calc-hub-mobile-panel {
+      transform:translateY(100%); transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #calc-hub-mobile-overlay.open #calc-hub-mobile-panel { transform:translateY(0); }
+    /* Hub icon ring animation */
+    .hub-btn-active { background: rgba(15,98,254,0.1); color:#0F62FE; }
+    /* Calc item hover */
+    .calc-hub-item {
+      transition: all 0.18s ease; border-radius:12px; cursor:pointer;
+    }
+    .calc-hub-item:hover { background: rgba(15,98,254,0.07); transform:translateY(-1px); }
+    .dark .calc-hub-item:hover { background: rgba(15,98,254,0.15); }
+    .calc-hub-item.active-calc { background:rgba(15,98,254,0.1); }
+    .dark .calc-hub-item.active-calc { background:rgba(15,98,254,0.2); }
 
     .hero-gradient { background: linear-gradient(135deg, #0F62FE 0%, #0047d1 40%, #1e1b4b 100%); }
 
@@ -160,6 +191,12 @@
     .badge-orange { background:rgba(234,88,12,0.1); color:#ea580c; }
     .badge-rose { background:rgba(225,29,72,0.1); color:#e11d48; }
     .badge-cyan { background:rgba(8,145,178,0.1); color:#0891b2; }
+
+    /* Calculator Hub custom scroll */
+    .custom-hub-scroll::-webkit-scrollbar { width:5px; }
+    .custom-hub-scroll::-webkit-scrollbar-track { background:transparent; }
+    .custom-hub-scroll::-webkit-scrollbar-thumb { background:rgba(15,98,254,0.25); border-radius:4px; }
+    .custom-hub-scroll::-webkit-scrollbar-thumb:hover { background:rgba(15,98,254,0.5); }
   </style>
 </head>
 
@@ -173,7 +210,7 @@
     <div class="flex items-center justify-between h-16">
 
       <!-- Logo -->
-      <a href="#" onclick="navigateTo(&#39;home&#39;)" class="flex items-center gap-2.5 flex-shrink-0">
+      <a href="#" onclick="navigateTo('home')" class="flex items-center gap-2.5 flex-shrink-0">
         <div class="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-600/30">
           <i class="fa-solid fa-house-chimney text-white text-sm"></i>
         </div>
@@ -183,14 +220,66 @@
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-1">
-        <a href="#" onclick="navigateTo(&#39;home&#39;)" data-nav="home" class="nav-link active px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Home</a>
-        <a href="#" onclick="navigateTo(&#39;home&#39;,&#39;calculator&#39;)" data-nav="calculator" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Mortgage Calculator</a>
-        <a href="#" onclick="navigateTo(&#39;refinance&#39;)" data-nav="refinance" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Refinance Calculator</a>
-        <a href="#" onclick="navigateTo(&#39;affordability&#39;)" data-nav="affordability" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Affordability</a>
-        <a href="#" onclick="navigateTo(&#39;guides&#39;)" data-nav="guides" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Loan Guides</a>
-        <a href="#" onclick="navigateTo(&#39;blog&#39;)" data-nav="blog" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Blog</a>
-        <a href="#" onclick="navigateTo(&#39;home&#39;,&#39;footer&#39;)" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</a>
+      <nav class="hidden lg:flex items-center gap-1" id="desktop-nav">
+        <a href="#" onclick="navigateTo('home')" data-nav="home" class="nav-link active px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Home</a>
+        <a href="#" onclick="navigateTo('home','calculator')" data-nav="calculator" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Mortgage Calculator</a>
+        <a href="#" onclick="navigateTo('refinance')" data-nav="refinance" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Refinance Calculator</a>
+        <a href="#" onclick="navigateTo('affordability')" data-nav="affordability" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Affordability</a>
+        <a href="#" onclick="navigateTo('guides')" data-nav="guides" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Loan Guides</a>
+        <a href="#" onclick="navigateTo('blog')" data-nav="blog" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Blog</a>
+        <a href="#" onclick="navigateTo('home','footer')" class="nav-link px-3.5 py-2 text-sm font-500 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</a>
+
+        <!-- Desktop Calculator Hub trigger -->
+        <div class="relative" id="calc-hub-wrapper">
+          <button id="calc-hub-btn" aria-label="Calculator Hub" aria-expanded="false"
+            class="flex items-center gap-1.5 px-3.5 py-2 text-sm font-600 text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20">
+            <i class="fa-solid fa-grid-2 text-primary-600"></i>
+            <span>Calculators</span>
+            <i class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-200" id="hub-chevron"></i>
+          </button>
+
+          <!-- Desktop Dropdown -->
+          <div id="calc-hub-dropdown"
+            class="absolute top-full right-0 mt-2 w-[600px] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800 z-[200] overflow-hidden"
+            style="box-shadow:0 20px 60px rgba(15,98,254,0.15),0 4px 20px rgba(0,0,0,0.1)">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-5 pt-5 pb-3 border-b border-gray-100 dark:border-gray-800">
+              <div>
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-600/30">
+                    <i class="fa-solid fa-calculator text-white text-xs"></i>
+                  </div>
+                  <span class="font-display font-800 text-gray-900 dark:text-white text-base">Calculator Hub</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-0.5 ml-9">18 free mortgage calculators</p>
+              </div>
+              <button onclick="closeCalcHub()" class="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <i class="fa-solid fa-xmark text-sm"></i>
+              </button>
+            </div>
+            <!-- Search -->
+            <div class="px-5 pt-3 pb-2">
+              <div class="relative">
+                <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                <input type="text" id="hub-search-desktop" placeholder="Search calculators..." autocomplete="off"
+                  class="w-full pl-8 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-600/10 transition-all dark:text-gray-200 placeholder-gray-400" />
+              </div>
+            </div>
+            <!-- Grid -->
+            <div class="px-4 pb-4 max-h-[440px] overflow-y-auto custom-hub-scroll">
+              <div class="grid grid-cols-3 gap-1.5" id="hub-grid-desktop"></div>
+              <div id="hub-no-results-desktop" class="hidden py-8 text-center">
+                <i class="fa-solid fa-magnifying-glass text-gray-200 dark:text-gray-700 text-3xl mb-2"></i>
+                <p class="text-sm text-gray-400">No calculators found</p>
+              </div>
+            </div>
+            <!-- Footer tip -->
+            <div class="px-5 py-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+              <i class="fa-solid fa-circle-info text-primary-600 text-xs"></i>
+              <span class="text-xs text-gray-400">All calculators are free. No registration required.</span>
+            </div>
+          </div>
+        </div>
       </nav>
 
       <!-- Right Side -->
@@ -202,9 +291,14 @@
         <a href="#" class="hidden sm:flex items-center gap-1.5 px-4 py-2 text-sm font-600 text-gray-700 dark:text-gray-300 hover:text-primary-600 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary-300 transition-all">
           <i class="fa-regular fa-user text-xs"></i> Sign In
         </a>
-        <a href="#" onclick="navigateTo(&#39;home&#39;,&#39;calculator&#39;)" class="hidden sm:flex items-center gap-1.5 px-4 py-2 text-sm font-600 text-white bg-primary-600 hover:bg-primary-700 rounded-lg shadow-lg shadow-primary-600/30 hover:shadow-primary-600/50 transition-all hover:scale-[1.02]">
-          <i class="fa-solid fa-chart-line text-xs"></i> Get Today&#39;s Rates
+        <a href="#" onclick="navigateTo('home','calculator')" class="hidden sm:flex items-center gap-1.5 px-4 py-2 text-sm font-600 text-white bg-primary-600 hover:bg-primary-700 rounded-lg shadow-lg shadow-primary-600/30 hover:shadow-primary-600/50 transition-all hover:scale-[1.02]">
+          <i class="fa-solid fa-chart-line text-xs"></i> Get Today's Rates
         </a>
+        <!-- Mobile Calculator Hub trigger -->
+        <button id="calc-hub-mobile-btn" aria-label="Calculator Hub" class="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors relative">
+          <i class="fa-solid fa-grid-2 text-primary-600"></i>
+          <span class="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-primary-600 rounded-full text-white flex items-center justify-center" style="font-size:8px;font-weight:700">18</span>
+        </button>
         <button id="hamburger" aria-label="Open menu" class="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -215,6 +309,55 @@
 
 <!-- Mobile drawer overlay -->
 <div id="drawer-overlay" class="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"></div>
+
+<!-- ============================================================ -->
+<!-- CALCULATOR HUB MOBILE OVERLAY -->
+<!-- ============================================================ -->
+<div id="calc-hub-mobile-overlay" class="fixed inset-0 z-[300] lg:hidden">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="closeCalcHub()"></div>
+  <div id="calc-hub-mobile-panel" class="absolute bottom-0 left-0 right-0 bg-white dark:bg-gray-900 rounded-t-3xl shadow-2xl" style="max-height:90vh;display:flex;flex-direction:column">
+    <!-- Handle -->
+    <div class="flex justify-center pt-3 pb-1">
+      <div class="w-10 h-1 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+    </div>
+    <!-- Header -->
+    <div class="flex items-center justify-between px-5 py-3 border-b border-gray-100 dark:border-gray-800">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-600/30">
+          <i class="fa-solid fa-calculator text-white text-sm"></i>
+        </div>
+        <div>
+          <div class="font-display font-800 text-gray-900 dark:text-white text-base leading-tight">Calculator Hub</div>
+          <div class="text-xs text-gray-400">18 free mortgage tools</div>
+        </div>
+      </div>
+      <button onclick="closeCalcHub()" class="w-8 h-8 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <!-- Search -->
+    <div class="px-5 pt-3 pb-2">
+      <div class="relative">
+        <i class="fa-solid fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+        <input type="text" id="hub-search-mobile" placeholder="Search calculators..." autocomplete="off"
+          class="w-full pl-10 pr-4 py-3 text-sm bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-600/10 transition-all dark:text-gray-200 placeholder-gray-400" />
+      </div>
+    </div>
+    <!-- List -->
+    <div class="flex-1 overflow-y-auto px-3 pb-6 pt-1">
+      <div class="grid grid-cols-2 gap-2" id="hub-grid-mobile"></div>
+      <div id="hub-no-results-mobile" class="hidden py-10 text-center">
+        <i class="fa-solid fa-magnifying-glass text-gray-200 dark:text-gray-700 text-4xl mb-3"></i>
+        <p class="text-sm text-gray-400">No calculators found</p>
+      </div>
+    </div>
+    <!-- Safe bottom -->
+    <div class="px-5 py-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+      <i class="fa-solid fa-circle-info text-primary-600 text-xs"></i>
+      <span class="text-xs text-gray-400">Tap any calculator to open it instantly.</span>
+    </div>
+  </div>
+</div>
 
 <!-- Mobile drawer -->
 <div id="mobile-drawer" class="fixed top-0 left-0 bottom-0 w-72 bg-white dark:bg-gray-900 z-50 lg:hidden shadow-2xl">
@@ -230,17 +373,17 @@
     </button>
   </div>
   <nav class="p-4 flex flex-col gap-1">
-    <a href="#" onclick="mobileNav(&#39;home&#39;)" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-house w-4 text-primary-600"></i> Home</a>
-    <a href="#" onclick="mobileNav(&#39;home&#39;,&#39;calculator&#39;)" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-calculator w-4 text-primary-600"></i> Mortgage Calculator</a>
-    <a href="#" onclick="mobileNav(&#39;refinance&#39;)" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-rotate w-4 text-primary-600"></i> Refinance Calculator</a>
-    <a href="#" onclick="mobileNav(&#39;affordability&#39;)" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-dollar-sign w-4 text-primary-600"></i> Affordability</a>
-    <a href="#" onclick="mobileNav(&#39;guides&#39;)" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-book w-4 text-primary-600"></i> Loan Guides</a>
-    <a href="#" onclick="mobileNav(&#39;blog&#39;)" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-newspaper w-4 text-primary-600"></i> Blog</a>
-    <a href="#" onclick="mobileNav(&#39;home&#39;,&#39;footer&#39;)" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-envelope w-4 text-primary-600"></i> Contact</a>
+    <a href="#" onclick="mobileNav('home')" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-house w-4 text-primary-600"></i> Home</a>
+    <a href="#" onclick="mobileNav('home','calculator')" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-calculator w-4 text-primary-600"></i> Mortgage Calculator</a>
+    <a href="#" onclick="mobileNav('refinance')" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-rotate w-4 text-primary-600"></i> Refinance Calculator</a>
+    <a href="#" onclick="mobileNav('affordability')" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-dollar-sign w-4 text-primary-600"></i> Affordability</a>
+    <a href="#" onclick="mobileNav('guides')" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-book w-4 text-primary-600"></i> Loan Guides</a>
+    <a href="#" onclick="mobileNav('blog')" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-newspaper w-4 text-primary-600"></i> Blog</a>
+    <a href="#" onclick="mobileNav('home','footer')" class="px-4 py-3 rounded-xl text-sm font-500 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 transition-all flex items-center gap-3"><i class="fa-solid fa-envelope w-4 text-primary-600"></i> Contact</a>
   </nav>
   <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-2">
     <a href="#" class="py-2.5 px-4 text-center text-sm font-600 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 rounded-xl hover:border-primary-300 transition-all">Sign In</a>
-    <a href="#" onclick="mobileNav(&#39;home&#39;,&#39;calculator&#39;)" class="py-2.5 px-4 text-center text-sm font-600 text-white bg-primary-600 rounded-xl hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/30">Get Today&#39;s Rates</a>
+    <a href="#" onclick="mobileNav('home','calculator')" class="py-2.5 px-4 text-center text-sm font-600 text-white bg-primary-600 rounded-xl hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/30">Get Today's Rates</a>
   </div>
 </div>
 
@@ -277,10 +420,10 @@
           </h1>
           <p class="text-lg text-white/80 leading-relaxed mb-8 max-w-lg">Estimate your monthly mortgage payment including taxes, insurance, PMI, HOA fees, and full loan details — completely free and always accurate.</p>
           <div class="flex flex-wrap gap-3 mb-10">
-            <a href="#" onclick="navigateTo(&#39;home&#39;,&#39;calculator&#39;)" class="flex items-center gap-2 px-6 py-3.5 bg-white text-primary-600 font-700 rounded-xl hover:bg-gray-50 transition-all hover:scale-[1.02] shadow-xl shadow-black/20">
+            <a href="#" onclick="navigateTo('home','calculator')" class="flex items-center gap-2 px-6 py-3.5 bg-white text-primary-600 font-700 rounded-xl hover:bg-gray-50 transition-all hover:scale-[1.02] shadow-xl shadow-black/20">
               <i class="fa-solid fa-calculator"></i> Calculate Now
             </a>
-            <a href="#" onclick="navigateTo(&#39;guides&#39;)" class="flex items-center gap-2 px-6 py-3.5 bg-white/15 backdrop-blur-sm border border-white/30 text-white font-600 rounded-xl hover:bg-white/25 transition-all">
+            <a href="#" onclick="navigateTo('guides')" class="flex items-center gap-2 px-6 py-3.5 bg-white/15 backdrop-blur-sm border border-white/30 text-white font-600 rounded-xl hover:bg-white/25 transition-all">
               <i class="fa-solid fa-book-open"></i> Learn More
             </a>
           </div>
@@ -300,7 +443,7 @@
                 <span class="flex items-center gap-1 text-xs text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full"><i class="fa-solid fa-arrow-trend-up"></i> Live</span>
               </div>
               <div class="text-4xl font-display font-800 text-primary-600 mb-1" id="hero-payment">$2,147</div>
-              <div class="text-xs text-gray-500 mb-4">Principal &amp; Interest + Taxes + Insurance</div>
+              <div class="text-xs text-gray-500 mb-4">Principal & Interest + Taxes + Insurance</div>
               <div class="grid grid-cols-3 gap-2">
                 <div class="bg-primary-50 dark:bg-primary-900/20 rounded-xl p-2.5 text-center">
                   <div class="text-xs text-gray-500 mb-1">Principal</div>
@@ -317,7 +460,7 @@
               </div>
               <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between text-xs text-gray-500">
                 <span><i class="fa-solid fa-home mr-1"></i> $350,000 • 30yr • 6.875%</span>
-                <span class="text-primary-600 font-600 cursor-pointer hover:underline" onclick="navigateTo(&#39;home&#39;,&#39;calculator&#39;)">View Details</span>
+                <span class="text-primary-600 font-600 cursor-pointer hover:underline" onclick="navigateTo('home','calculator')">View Details</span>
               </div>
             </div>
             <div class="absolute -top-6 -right-4 glass rounded-2xl p-3 shadow-xl animate-float" style="animation-delay:1s">
@@ -350,7 +493,7 @@
     </div>
     <div class="absolute bottom-0 left-0 right-0">
       <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0 80L1440 80L1440 20Q1200 80 720 40Q240 0 0 60Z" class="fill-white dark:fill-gray-950"></path>
+        <path d="M0 80L1440 80L1440 20Q1200 80 720 40Q240 0 0 60Z" class="fill-white dark:fill-gray-950"/>
       </svg>
     </div>
   </section>
@@ -375,26 +518,26 @@
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-house-chimney text-primary-500 mr-1"></i> Home Price</label>
-              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="home-price" value="350000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm"/></div>
+              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="home-price" value="350000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" /></div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-arrow-down text-primary-500 mr-1"></i> Down Payment</label>
               <div class="relative flex">
                 <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600" id="dp-symbol">$</span>
-                <input type="number" id="down-payment" value="70000" class="calc-input w-full pl-8 pr-24 py-2.5 text-sm"/>
+                <input type="number" id="down-payment" value="70000" class="calc-input w-full pl-8 pr-24 py-2.5 text-sm" />
                 <div class="absolute right-1 top-1/2 -translate-y-1/2 flex bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden text-xs font-600">
-                  <button class="toggle-btn active px-2 py-1.5" id="dp-dollar" onclick="toggleDP(&#39;dollar&#39;)">$</button>
-                  <button class="toggle-btn px-2 py-1.5 text-gray-500" id="dp-pct" onclick="toggleDP(&#39;pct&#39;)">%</button>
+                  <button class="toggle-btn active px-2 py-1.5" id="dp-dollar" onclick="toggleDP('dollar')">$</button>
+                  <button class="toggle-btn px-2 py-1.5 text-gray-500" id="dp-pct" onclick="toggleDP('pct')">%</button>
                 </div>
               </div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-landmark text-primary-500 mr-1"></i> Loan Amount <span class="text-xs text-gray-400">(auto)</span></label>
-              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="text" id="loan-amount" readonly="" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 cursor-not-allowed text-gray-600 dark:text-gray-400" value="280,000"/></div>
+              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="text" id="loan-amount" readonly class="calc-input w-full pl-8 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 cursor-not-allowed text-gray-600 dark:text-gray-400" value="280,000" /></div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-percent text-primary-500 mr-1"></i> Interest Rate</label>
-              <div class="relative"><input type="number" id="interest-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
+              <div class="relative"><input type="number" id="interest-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-calendar text-primary-500 mr-1"></i> Loan Term</label>
@@ -404,23 +547,23 @@
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-calendar-day text-primary-500 mr-1"></i> Loan Start Date</label>
-              <input type="month" id="start-date" class="calc-input w-full px-3 py-2.5 text-sm"/>
+              <input type="month" id="start-date" class="calc-input w-full px-3 py-2.5 text-sm" />
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-building-columns text-primary-500 mr-1"></i> Property Tax (yr)</label>
-              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="property-tax" value="3600" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm"/></div>
+              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="property-tax" value="3600" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" /></div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-shield text-primary-500 mr-1"></i> Home Insurance (yr)</label>
-              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="home-insurance" value="1200" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm"/></div>
+              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="home-insurance" value="1200" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" /></div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-umbrella text-primary-500 mr-1"></i> PMI (monthly)</label>
-              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="pmi" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm"/></div>
+              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="pmi" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" /></div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-people-roof text-primary-500 mr-1"></i> HOA Fee (monthly)</label>
-              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="hoa" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm"/></div>
+              <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="hoa" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" /></div>
             </div>
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-file-contract text-primary-500 mr-1"></i> Loan Type</label>
@@ -431,8 +574,8 @@
             <div>
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5"><i class="fa-solid fa-bullseye text-primary-500 mr-1"></i> Purpose</label>
               <div class="flex rounded-lg overflow-hidden border-2 border-gray-200 dark:border-gray-700">
-                <button id="purpose-purchase" onclick="setPurpose(&#39;purchase&#39;)" class="flex-1 py-2.5 text-sm font-600 bg-primary-600 text-white transition-all">Purchase</button>
-                <button id="purpose-refi" onclick="setPurpose(&#39;refi&#39;)" class="flex-1 py-2.5 text-sm font-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Refinancing</button>
+                <button id="purpose-purchase" onclick="setPurpose('purchase')" class="flex-1 py-2.5 text-sm font-600 bg-primary-600 text-white transition-all">Purchase</button>
+                <button id="purpose-refi" onclick="setPurpose('refi')" class="flex-1 py-2.5 text-sm font-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Refinancing</button>
               </div>
             </div>
           </div>
@@ -456,7 +599,7 @@
             <div class="text-4xl font-display font-800 mb-0.5" id="result-monthly">$2,147</div>
             <div class="text-xs text-white/60">Principal + Interest + Taxes + Insurance</div>
             <div class="mt-4 space-y-2">
-              <div class="flex justify-between text-sm"><span class="text-white/70">Principal &amp; Interest</span><span class="font-600" id="result-pi">$1,847</span></div>
+              <div class="flex justify-between text-sm"><span class="text-white/70">Principal & Interest</span><span class="font-600" id="result-pi">$1,847</span></div>
               <div class="flex justify-between text-sm"><span class="text-white/70">Property Tax</span><span class="font-600" id="result-tax">$300</span></div>
               <div class="flex justify-between text-sm"><span class="text-white/70">Home Insurance</span><span class="font-600" id="result-ins">$100</span></div>
               <div class="flex justify-between text-sm"><span class="text-white/70">PMI</span><span class="font-600" id="result-pmi">$0</span></div>
@@ -507,20 +650,20 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12 reveal">
         <div class="section-label">Visual Analytics</div>
-        <h2 class="font-display text-3xl sm:text-4xl font-800 text-gray-900 dark:text-white mb-4">Charts &amp; Visual Analysis</h2>
+        <h2 class="font-display text-3xl sm:text-4xl font-800 text-gray-900 dark:text-white mb-4">Charts & Visual Analysis</h2>
         <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Visualize your mortgage breakdown, payment trends, and amortization progress.</p>
       </div>
       <div class="grid lg:grid-cols-2 gap-6 reveal">
         <div class="premium-card p-6">
-          <div class="flex items-center justify-between mb-4"><h3 class="font-600 text-gray-900 dark:text-white text-sm">Balance Over Time</h3><button onclick="downloadChart(&#39;balance-chart&#39;)" class="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1 hover:underline"><i class="fa-solid fa-download"></i> PNG</button></div>
+          <div class="flex items-center justify-between mb-4"><h3 class="font-600 text-gray-900 dark:text-white text-sm">Balance Over Time</h3><button onclick="downloadChart('balance-chart')" class="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1 hover:underline"><i class="fa-solid fa-download"></i> PNG</button></div>
           <canvas id="balance-chart" height="220"></canvas>
         </div>
         <div class="premium-card p-6">
-          <div class="flex items-center justify-between mb-4"><h3 class="font-600 text-gray-900 dark:text-white text-sm">Interest vs Principal Over Time</h3><button onclick="downloadChart(&#39;ipvp-chart&#39;)" class="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1 hover:underline"><i class="fa-solid fa-download"></i> PNG</button></div>
+          <div class="flex items-center justify-between mb-4"><h3 class="font-600 text-gray-900 dark:text-white text-sm">Interest vs Principal Over Time</h3><button onclick="downloadChart('ipvp-chart')" class="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1 hover:underline"><i class="fa-solid fa-download"></i> PNG</button></div>
           <canvas id="ipvp-chart" height="220"></canvas>
         </div>
         <div class="premium-card p-6 lg:col-span-2">
-          <div class="flex items-center justify-between mb-4"><h3 class="font-600 text-gray-900 dark:text-white text-sm">Cumulative Principal vs Interest Paid</h3><button onclick="downloadChart(&#39;trend-chart&#39;)" class="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1 hover:underline"><i class="fa-solid fa-download"></i> PNG</button></div>
+          <div class="flex items-center justify-between mb-4"><h3 class="font-600 text-gray-900 dark:text-white text-sm">Cumulative Principal vs Interest Paid</h3><button onclick="downloadChart('trend-chart')" class="text-xs text-primary-600 hover:text-primary-700 flex items-center gap-1 hover:underline"><i class="fa-solid fa-download"></i> PNG</button></div>
           <canvas id="trend-chart" height="140"></canvas>
         </div>
       </div>
@@ -537,7 +680,7 @@
       </div>
       <div class="premium-card p-6 reveal">
         <div class="flex flex-col sm:flex-row gap-3 mb-5">
-          <div class="relative flex-1"><i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i><input type="text" id="amort-search" placeholder="Search by month or year..." class="calc-input w-full pl-9 pr-4 py-2.5 text-sm" oninput="filterTable()"/></div>
+          <div class="relative flex-1"><i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i><input type="text" id="amort-search" placeholder="Search by month or year..." class="calc-input w-full pl-9 pr-4 py-2.5 text-sm" oninput="filterTable()" /></div>
           <div class="flex gap-2">
             <button onclick="exportPDF()" class="flex items-center gap-1.5 px-4 py-2.5 bg-rose-500 hover:bg-rose-600 text-white text-sm font-600 rounded-lg transition-all"><i class="fa-regular fa-file-pdf"></i> PDF</button>
             <button onclick="exportCSV()" class="flex items-center gap-1.5 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-600 rounded-lg transition-all"><i class="fa-regular fa-file-excel"></i> CSV</button>
@@ -547,12 +690,12 @@
           <table class="amort-table w-full text-sm">
             <thead>
               <tr class="bg-gray-100 dark:bg-gray-800">
-                <th class="text-left px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable(&#39;num&#39;)">#</th>
-                <th class="text-left px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable(&#39;month&#39;)">Month</th>
-                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable(&#39;principal&#39;)">Principal</th>
-                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable(&#39;interest&#39;)">Interest</th>
-                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable(&#39;payment&#39;)">Payment</th>
-                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable(&#39;balance&#39;)">Balance</th>
+                <th class="text-left px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable('num')">#</th>
+                <th class="text-left px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable('month')">Month</th>
+                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable('principal')">Principal</th>
+                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable('interest')">Interest</th>
+                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable('payment')">Payment</th>
+                <th class="text-right px-4 py-3 font-600 text-gray-600 dark:text-gray-400 cursor-pointer hover:text-primary-600" onclick="sortTable('balance')">Balance</th>
               </tr>
             </thead>
             <tbody id="amort-tbody"></tbody>
@@ -561,7 +704,7 @@
         <div class="flex items-center justify-between mt-4 flex-wrap gap-2">
           <div class="text-sm text-gray-500 dark:text-gray-400" id="page-info">Showing 1–12 of 360 payments</div>
           <div class="flex gap-1">
-            <button onclick="changePage(-1)" id="prev-btn" class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-600 transition-all" disabled=""><i class="fa-solid fa-chevron-left"></i></button>
+            <button onclick="changePage(-1)" id="prev-btn" class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-600 transition-all" disabled><i class="fa-solid fa-chevron-left"></i></button>
             <div id="page-btns" class="flex gap-1"></div>
             <button onclick="changePage(1)" id="next-btn" class="px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:border-primary-300 hover:text-primary-600 transition-all"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
@@ -590,15 +733,15 @@
         <p class="text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Explore our full suite of financial calculators to make smarter home buying decisions.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
-        <div class="premium-card p-5 flex items-start gap-4 group cursor-pointer" onclick="navigateTo(&#39;home&#39;,&#39;calculator&#39;)">
+        <div class="premium-card p-5 flex items-start gap-4 group cursor-pointer" onclick="navigateTo('home','calculator')">
           <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center group-hover:bg-primary-600 transition-colors"><i class="fa-solid fa-calculator text-primary-600 group-hover:text-white transition-colors"></i></div>
           <div class="flex-1"><h3 class="font-700 text-gray-900 dark:text-white text-sm mb-1 group-hover:text-primary-600 transition-colors">Mortgage Calculator</h3><p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Calculate your monthly principal and interest payment.</p><button class="text-xs font-600 text-primary-600 flex items-center gap-1 hover:gap-2 transition-all">Open Calculator <i class="fa-solid fa-arrow-right text-xs"></i></button></div>
         </div>
-        <div class="premium-card p-5 flex items-start gap-4 group cursor-pointer" onclick="navigateTo(&#39;affordability&#39;)">
+        <div class="premium-card p-5 flex items-start gap-4 group cursor-pointer" onclick="navigateTo('affordability')">
           <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center group-hover:bg-emerald-600 transition-colors"><i class="fa-solid fa-home text-emerald-600 group-hover:text-white transition-colors"></i></div>
           <div class="flex-1"><h3 class="font-700 text-gray-900 dark:text-white text-sm mb-1 group-hover:text-emerald-600 transition-colors">Affordability Calculator</h3><p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Find out how much house you can comfortably afford.</p><button class="text-xs font-600 text-emerald-600 flex items-center gap-1 hover:gap-2 transition-all">Open Calculator <i class="fa-solid fa-arrow-right text-xs"></i></button></div>
         </div>
-        <div class="premium-card p-5 flex items-start gap-4 group cursor-pointer" onclick="navigateTo(&#39;refinance&#39;)">
+        <div class="premium-card p-5 flex items-start gap-4 group cursor-pointer" onclick="navigateTo('refinance')">
           <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center group-hover:bg-purple-600 transition-colors"><i class="fa-solid fa-rotate text-purple-600 group-hover:text-white transition-colors"></i></div>
           <div class="flex-1"><h3 class="font-700 text-gray-900 dark:text-white text-sm mb-1 group-hover:text-purple-600 transition-colors">Refinance Calculator</h3><p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Calculate savings from refinancing your existing mortgage.</p><button class="text-xs font-600 text-purple-600 flex items-center gap-1 hover:gap-2 transition-all">Open Calculator <i class="fa-solid fa-arrow-right text-xs"></i></button></div>
         </div>
@@ -641,10 +784,10 @@
       <div class="space-y-3 reveal">
         <div class="faq-item premium-card overflow-hidden" data-index="0"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(0)"><span class="font-600 text-gray-900 dark:text-white text-sm">What is a mortgage?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">A mortgage is a type of loan specifically used to purchase real estate. The property itself serves as collateral, meaning the lender can foreclose on it if you fail to make payments. Mortgages typically span 15–30 years and include both principal (the amount borrowed) and interest payments.</div></div></div>
         <div class="faq-item premium-card overflow-hidden" data-index="1"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(1)"><span class="font-600 text-gray-900 dark:text-white text-sm">How is monthly mortgage payment calculated?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Your monthly payment is calculated using the formula: M = P[r(1+r)^n]/[(1+r)^n-1], where P is the loan amount, r is the monthly interest rate, and n is the number of payments. PITI payments include Principal, Interest, Taxes, and Insurance.</div></div></div>
-        <div class="faq-item premium-card overflow-hidden" data-index="2"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(2)"><span class="font-600 text-gray-900 dark:text-white text-sm">What is PMI and when do I need it?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">PMI (Private Mortgage Insurance) is required when your down payment is less than 20% of the home&#39;s purchase price. It protects the lender, not you. PMI typically costs 0.5%–1.5% of the loan annually. You can request PMI removal when you reach 20% equity.</div></div></div>
+        <div class="faq-item premium-card overflow-hidden" data-index="2"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(2)"><span class="font-600 text-gray-900 dark:text-white text-sm">What is PMI and when do I need it?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">PMI (Private Mortgage Insurance) is required when your down payment is less than 20% of the home's purchase price. It protects the lender, not you. PMI typically costs 0.5%–1.5% of the loan annually. You can request PMI removal when you reach 20% equity.</div></div></div>
         <div class="faq-item premium-card overflow-hidden" data-index="3"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(3)"><span class="font-600 text-gray-900 dark:text-white text-sm">What factors affect my mortgage payment?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Key factors include: home price, down payment amount, interest rate, loan term, property taxes, homeowners insurance, PMI, HOA fees, and your credit score. A higher credit score typically qualifies you for lower interest rates, significantly reducing your payment.</div></div></div>
         <div class="faq-item premium-card overflow-hidden" data-index="4"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(4)"><span class="font-600 text-gray-900 dark:text-white text-sm">How much down payment is required?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Minimum down payments vary: Conventional loans require 3–20%, FHA loans require 3.5% (with 580+ credit score), VA loans require 0% for eligible veterans, and USDA loans require 0% for rural properties. A 20% down payment avoids PMI and reduces monthly payments.</div></div></div>
-        <div class="faq-item premium-card overflow-hidden" data-index="5"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(5)"><span class="font-600 text-gray-900 dark:text-white text-sm">Can I refinance my mortgage later?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Yes! Refinancing replaces your current mortgage with a new one, typically at a lower interest rate. It&#39;s generally worth it if you can lower your rate by at least 0.75–1%, plan to stay in the home long enough to recoup closing costs, and have good credit.</div></div></div>
+        <div class="faq-item premium-card overflow-hidden" data-index="5"><button class="w-full flex items-center justify-between p-5 text-left" onclick="toggleFAQ(5)"><span class="font-600 text-gray-900 dark:text-white text-sm">Can I refinance my mortgage later?</span><span class="faq-icon text-gray-400 ml-4 flex-shrink-0"><i class="fa-solid fa-plus text-primary-600"></i></span></button><div class="faq-content"><div class="px-5 pb-5 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Yes! Refinancing replaces your current mortgage with a new one, typically at a lower interest rate. It's generally worth it if you can lower your rate by at least 0.75–1%, plan to stay in the home long enough to recoup closing costs, and have good credit.</div></div></div>
       </div>
     </div>
   </section>
@@ -661,10 +804,10 @@
         <i class="fa-solid fa-bolt text-amber-400"></i> Start for Free — No Sign Up Required
       </div>
       <h2 class="font-display text-3xl sm:text-5xl font-800 text-white mb-4">Ready to Calculate Your Mortgage?</h2>
-      <p class="text-lg text-white/80 mb-8">Use our free calculator and compare today&#39;s mortgage options to find your perfect loan.</p>
+      <p class="text-lg text-white/80 mb-8">Use our free calculator and compare today's mortgage options to find your perfect loan.</p>
       <div class="flex flex-wrap gap-3 justify-center">
-        <a href="#" onclick="navigateTo(&#39;home&#39;,&#39;calculator&#39;)" class="flex items-center gap-2 px-7 py-4 bg-white text-primary-600 font-700 rounded-xl hover:bg-gray-50 transition-all hover:scale-[1.02] shadow-xl shadow-black/20"><i class="fa-solid fa-calculator"></i> Calculate Now</a>
-        <a href="#" onclick="navigateTo(&#39;refinance&#39;)" class="flex items-center gap-2 px-7 py-4 bg-white/15 backdrop-blur-sm border border-white/30 text-white font-600 rounded-xl hover:bg-white/25 transition-all"><i class="fa-solid fa-chart-bar"></i> Compare Rates</a>
+        <a href="#" onclick="navigateTo('home','calculator')" class="flex items-center gap-2 px-7 py-4 bg-white text-primary-600 font-700 rounded-xl hover:bg-gray-50 transition-all hover:scale-[1.02] shadow-xl shadow-black/20"><i class="fa-solid fa-calculator"></i> Calculate Now</a>
+        <a href="#" onclick="navigateTo('refinance')" class="flex items-center gap-2 px-7 py-4 bg-white/15 backdrop-blur-sm border border-white/30 text-white font-600 rounded-xl hover:bg-white/25 transition-all"><i class="fa-solid fa-chart-bar"></i> Compare Rates</a>
       </div>
     </div>
   </section>
@@ -678,7 +821,7 @@
   <div class="hero-gradient py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
       <div class="flex items-center gap-2 text-white/60 text-sm mb-4">
-        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo(&#39;home&#39;)">Home</span>
+        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo('home')">Home</span>
         <i class="fa-solid fa-chevron-right text-xs"></i>
         <span class="text-white">Refinance Calculator</span>
       </div>
@@ -686,7 +829,7 @@
       <p class="text-white/80 text-lg max-w-2xl">Find out how much you can save by refinancing your mortgage. Compare your current loan to a new one and calculate your break-even point.</p>
     </div>
     <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"></path></svg>
+      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg>
     </div>
   </div>
 
@@ -722,21 +865,21 @@
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Current Loan Balance</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="refi-cur-balance" value="260000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRefi()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="refi-cur-balance" value="260000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRefi()" /></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Current Interest Rate</label>
-                <div class="relative"><input type="number" id="refi-cur-rate" value="7.5" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcRefi()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
+                <div class="relative"><input type="number" id="refi-cur-rate" value="7.5" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcRefi()" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Remaining Term</label>
                 <select id="refi-cur-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcRefi()">
-                  <option value="30">30 Years</option><option value="25">25 Years</option><option value="20">20 Years</option><option value="15" selected="">15 Years</option><option value="10">10 Years</option><option value="5">5 Years</option>
+                  <option value="30">30 Years</option><option value="25">25 Years</option><option value="20">20 Years</option><option value="15" selected>15 Years</option><option value="10">10 Years</option><option value="5">5 Years</option>
                 </select>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Current Monthly Payment</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="text" id="refi-cur-payment-display" readonly="" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 cursor-not-allowed" value="0"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="text" id="refi-cur-payment-display" readonly class="calc-input w-full pl-8 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 cursor-not-allowed" value="0" /></div>
               </div>
             </div>
           </div>
@@ -751,26 +894,26 @@
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">New Interest Rate</label>
-                <div class="relative"><input type="number" id="refi-new-rate" value="6.25" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcRefi()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
+                <div class="relative"><input type="number" id="refi-new-rate" value="6.25" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcRefi()" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">New Loan Term</label>
                 <select id="refi-new-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcRefi()">
-                  <option value="30" selected="">30 Years</option><option value="25">25 Years</option><option value="20">20 Years</option><option value="15">15 Years</option><option value="10">10 Years</option>
+                  <option value="30" selected>30 Years</option><option value="25">25 Years</option><option value="20">20 Years</option><option value="15">15 Years</option><option value="10">10 Years</option>
                 </select>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Closing Costs</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="refi-closing" value="4000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRefi()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="refi-closing" value="4000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRefi()" /></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">New Monthly Payment</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="text" id="refi-new-payment-display" readonly="" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 cursor-not-allowed" value="0"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="text" id="refi-new-payment-display" readonly class="calc-input w-full pl-8 pr-4 py-2.5 text-sm bg-gray-50 dark:bg-gray-800 cursor-not-allowed" value="0" /></div>
               </div>
             </div>
             <div class="mt-4">
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-2">How long do you plan to stay? <span class="text-primary-600 font-700" id="refi-stay-label">7 years</span></label>
-              <input type="range" id="refi-stay" min="1" max="30" value="7" class="w-full" oninput="updateStayLabel();calcRefi()"/>
+              <input type="range" id="refi-stay" min="1" max="30" value="7" class="w-full" oninput="updateStayLabel();calcRefi()" />
               <div class="flex justify-between text-xs text-gray-400 mt-1"><span>1 yr</span><span>30 yrs</span></div>
             </div>
           </div>
@@ -852,7 +995,7 @@
   <div class="hero-gradient py-16 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
       <div class="flex items-center gap-2 text-white/60 text-sm mb-4">
-        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo(&#39;home&#39;)">Home</span>
+        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo('home')">Home</span>
         <i class="fa-solid fa-chevron-right text-xs"></i>
         <span class="text-white">Affordability Calculator</span>
       </div>
@@ -860,7 +1003,7 @@
       <p class="text-white/80 text-lg max-w-2xl">Find out how much house you can afford based on your income, debts, and down payment. We use industry-standard DTI ratios to give you an accurate picture.</p>
     </div>
     <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"></path></svg>
+      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg>
     </div>
   </div>
 
@@ -869,48 +1012,48 @@
       <div class="grid lg:grid-cols-5 gap-6">
         <!-- Form -->
         <div class="lg:col-span-3 space-y-6">
-          <!-- Income &amp; Debts -->
+          <!-- Income & Debts -->
           <div class="premium-card p-6">
             <div class="flex items-center gap-2 mb-5">
               <div class="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex items-center justify-center"><i class="fa-solid fa-wallet text-emerald-600 text-sm"></i></div>
-              <h3 class="font-700 text-gray-900 dark:text-white">Income &amp; Debts</h3>
+              <h3 class="font-700 text-gray-900 dark:text-white">Income & Debts</h3>
             </div>
             <div class="grid sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Annual Gross Income</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-income" value="120000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-income" value="120000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()" /></div>
                 <p class="text-xs text-gray-400 mt-1">Combined household income</p>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Monthly Debts</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-debts" value="500" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-debts" value="500" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()" /></div>
                 <p class="text-xs text-gray-400 mt-1">Car, student, credit card payments</p>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Down Payment</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-down" value="60000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-down" value="60000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()" /></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label>
-                <div class="relative"><input type="number" id="aff-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcAffordability()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
+                <div class="relative"><input type="number" id="aff-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcAffordability()" /><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">%</span></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Term</label>
                 <select id="aff-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcAffordability()">
-                  <option value="30" selected="">30 Years</option><option value="25">25 Years</option><option value="20">20 Years</option><option value="15">15 Years</option>
+                  <option value="30" selected>30 Years</option><option value="25">25 Years</option><option value="20">20 Years</option><option value="15">15 Years</option>
                 </select>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Property Tax (yr)</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-tax" value="3600" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-tax" value="3600" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()" /></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Home Insurance (yr)</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-ins" value="1200" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-ins" value="1200" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()" /></div>
               </div>
               <div>
                 <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">HOA (monthly)</label>
-                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-hoa" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()"/></div>
+                <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-600">$</span><input type="number" id="aff-hoa" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcAffordability()" /></div>
               </div>
             </div>
           </div>
@@ -938,7 +1081,7 @@
             </div>
             <div class="mt-4">
               <label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-2">Custom DTI: <span class="text-primary-600 font-700" id="aff-dti-label">36%</span></label>
-              <input type="range" id="aff-dti-range" min="20" max="50" value="36" class="w-full" oninput="updateDTILabel();calcAffordability()"/>
+              <input type="range" id="aff-dti-range" min="20" max="50" value="36" class="w-full" oninput="updateDTILabel();calcAffordability()" />
               <div class="flex justify-between text-xs text-gray-400 mt-1"><span>20% (Very Safe)</span><span>50% (Max)</span></div>
             </div>
           </div>
@@ -1000,7 +1143,7 @@
 
       <!-- Tips grid -->
       <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="premium-card p-5 text-center"><div class="text-2xl font-800 text-primary-600 mb-1">28%</div><div class="text-xs text-gray-500 dark:text-gray-400">Conventional &#34;housing ratio&#34; — monthly housing costs should not exceed 28% of gross monthly income.</div></div>
+        <div class="premium-card p-5 text-center"><div class="text-2xl font-800 text-primary-600 mb-1">28%</div><div class="text-xs text-gray-500 dark:text-gray-400">Conventional "housing ratio" — monthly housing costs should not exceed 28% of gross monthly income.</div></div>
         <div class="premium-card p-5 text-center"><div class="text-2xl font-800 text-emerald-600 mb-1">3-6mo</div><div class="text-xs text-gray-500 dark:text-gray-400">Recommended emergency fund savings in addition to your down payment before buying.</div></div>
         <div class="premium-card p-5 text-center"><div class="text-2xl font-800 text-purple-600 mb-1">20%</div><div class="text-xs text-gray-500 dark:text-gray-400">Ideal down payment to avoid PMI and qualify for the best interest rates from most lenders.</div></div>
         <div class="premium-card p-5 text-center"><div class="text-2xl font-800 text-amber-600 mb-1">740+</div><div class="text-xs text-gray-500 dark:text-gray-400">Target credit score for the most competitive mortgage rates and favorable loan terms.</div></div>
@@ -1015,7 +1158,7 @@
   <div class="hero-gradient py-16 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
       <div class="flex items-center gap-2 text-white/60 text-sm mb-4">
-        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo(&#39;home&#39;)">Home</span>
+        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo('home')">Home</span>
         <i class="fa-solid fa-chevron-right text-xs"></i>
         <span class="text-white">Loan Guides</span>
       </div>
@@ -1023,7 +1166,7 @@
       <p class="text-white/80 text-lg max-w-2xl">Comprehensive guides to help you understand every aspect of the mortgage process — from application to payoff.</p>
     </div>
     <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"></path></svg>
+      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg>
     </div>
   </div>
 
@@ -1032,11 +1175,11 @@
 
       <!-- Category filter -->
       <div class="flex flex-wrap gap-2 mb-10">
-        <button onclick="filterGuides(&#39;all&#39;)" class="guide-filter active px-4 py-2 rounded-full text-sm font-600 bg-primary-600 text-white transition-all" data-cat="all">All Guides</button>
-        <button onclick="filterGuides(&#39;basics&#39;)" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="basics">Basics</button>
-        <button onclick="filterGuides(&#39;rates&#39;)" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="rates">Rates &amp; Fees</button>
-        <button onclick="filterGuides(&#39;types&#39;)" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="types">Loan Types</button>
-        <button onclick="filterGuides(&#39;strategy&#39;)" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="strategy">Strategy</button>
+        <button onclick="filterGuides('all')" class="guide-filter active px-4 py-2 rounded-full text-sm font-600 bg-primary-600 text-white transition-all" data-cat="all">All Guides</button>
+        <button onclick="filterGuides('basics')" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="basics">Basics</button>
+        <button onclick="filterGuides('rates')" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="rates">Rates & Fees</button>
+        <button onclick="filterGuides('types')" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="types">Loan Types</button>
+        <button onclick="filterGuides('strategy')" class="guide-filter px-4 py-2 rounded-full text-sm font-600 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary-50 hover:text-primary-600 transition-all" data-cat="strategy">Strategy</button>
       </div>
 
       <!-- Featured guide -->
@@ -1081,7 +1224,7 @@
         <div class="premium-card overflow-hidden group cursor-pointer guide-item" data-cat="rates">
           <div class="h-44 bg-gradient-to-br from-purple-500 to-purple-700 relative overflow-hidden flex items-center justify-center">
             <i class="fa-solid fa-percent text-white/20 text-8xl"></i>
-            <div class="absolute bottom-4 left-4"><span class="badge badge-purple bg-white/20 text-white">Rates &amp; Fees</span></div>
+            <div class="absolute bottom-4 left-4"><span class="badge badge-purple bg-white/20 text-white">Rates & Fees</span></div>
           </div>
           <div class="p-5">
             <h3 class="font-700 text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors">How Mortgage Interest Works</h3>
@@ -1093,7 +1236,7 @@
         <div class="premium-card overflow-hidden group cursor-pointer guide-item" data-cat="rates">
           <div class="h-44 bg-gradient-to-br from-emerald-500 to-emerald-700 relative overflow-hidden flex items-center justify-center">
             <i class="fa-solid fa-umbrella text-white/20 text-8xl"></i>
-            <div class="absolute bottom-4 left-4"><span class="badge badge-green bg-white/20 text-white">Rates &amp; Fees</span></div>
+            <div class="absolute bottom-4 left-4"><span class="badge badge-green bg-white/20 text-white">Rates & Fees</span></div>
           </div>
           <div class="p-5">
             <h3 class="font-700 text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors">PMI Explained</h3>
@@ -1105,11 +1248,11 @@
         <div class="premium-card overflow-hidden group cursor-pointer guide-item" data-cat="rates">
           <div class="h-44 bg-gradient-to-br from-amber-500 to-orange-600 relative overflow-hidden flex items-center justify-center">
             <i class="fa-solid fa-building-columns text-white/20 text-8xl"></i>
-            <div class="absolute bottom-4 left-4"><span class="badge badge-orange bg-white/20 text-white">Rates &amp; Fees</span></div>
+            <div class="absolute bottom-4 left-4"><span class="badge badge-orange bg-white/20 text-white">Rates & Fees</span></div>
           </div>
           <div class="p-5">
             <h3 class="font-700 text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors">Property Tax Guide</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">Property taxes vary widely by location. Learn how they&#39;re assessed, how they affect your mortgage payment, homestead exemptions, and how to appeal an assessment.</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">Property taxes vary widely by location. Learn how they're assessed, how they affect your mortgage payment, homestead exemptions, and how to appeal an assessment.</p>
             <div class="flex items-center justify-between"><div class="flex items-center gap-2 text-xs text-gray-400"><span><i class="fa-solid fa-clock mr-1"></i>8 min</span><span><i class="fa-solid fa-eye mr-1"></i>15k</span></div><button class="text-sm font-600 text-primary-600 flex items-center gap-1 hover:gap-2 transition-all">Read <i class="fa-solid fa-arrow-right text-xs"></i></button></div>
           </div>
         </div>
@@ -1117,11 +1260,11 @@
         <div class="premium-card overflow-hidden group cursor-pointer guide-item" data-cat="rates">
           <div class="h-44 bg-gradient-to-br from-rose-500 to-rose-700 relative overflow-hidden flex items-center justify-center">
             <i class="fa-solid fa-shield-halved text-white/20 text-8xl"></i>
-            <div class="absolute bottom-4 left-4"><span class="badge badge-rose bg-white/20 text-white">Rates &amp; Fees</span></div>
+            <div class="absolute bottom-4 left-4"><span class="badge badge-rose bg-white/20 text-white">Rates & Fees</span></div>
           </div>
           <div class="p-5">
             <h3 class="font-700 text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors">Home Insurance Basics</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">Homeowners insurance — what it covers, what it doesn&#39;t, how much you need, factors that affect your premiums, and expert tips to lower costs without sacrificing coverage.</p>
+            <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">Homeowners insurance — what it covers, what it doesn't, how much you need, factors that affect your premiums, and expert tips to lower costs without sacrificing coverage.</p>
             <div class="flex items-center justify-between"><div class="flex items-center gap-2 text-xs text-gray-400"><span><i class="fa-solid fa-clock mr-1"></i>6 min</span><span><i class="fa-solid fa-eye mr-1"></i>12k</span></div><button class="text-sm font-600 text-primary-600 flex items-center gap-1 hover:gap-2 transition-all">Read <i class="fa-solid fa-arrow-right text-xs"></i></button></div>
           </div>
         </div>
@@ -1218,7 +1361,7 @@
         <h3 class="font-display font-800 text-gray-900 dark:text-white text-2xl mb-2">Get New Guides in Your Inbox</h3>
         <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">Join 50,000+ homebuyers who receive our weekly mortgage tips and rate alerts.</p>
         <form class="flex gap-2 max-w-sm mx-auto" onsubmit="return false">
-          <input type="email" placeholder="your@email.com" class="flex-1 px-4 py-3 calc-input text-sm"/>
+          <input type="email" placeholder="your@email.com" class="flex-1 px-4 py-3 calc-input text-sm" />
           <button type="submit" class="px-5 py-3 bg-primary-600 hover:bg-primary-700 text-white font-600 rounded-xl transition-all text-sm">Subscribe</button>
         </form>
       </div>
@@ -1232,7 +1375,7 @@
   <div class="hero-gradient py-16 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
       <div class="flex items-center gap-2 text-white/60 text-sm mb-4">
-        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo(&#39;home&#39;)">Home</span>
+        <span class="cursor-pointer hover:text-white transition-colors" onclick="navigateTo('home')">Home</span>
         <i class="fa-solid fa-chevron-right text-xs"></i>
         <span class="text-white">Blog</span>
       </div>
@@ -1240,18 +1383,18 @@
       <p class="text-white/80 text-lg max-w-2xl">Expert insights, market updates, and practical tips to help you navigate the home buying process with confidence.</p>
     </div>
     <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"></path></svg>
+      <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg>
     </div>
   </div>
 
   <div class="py-16 bg-white dark:bg-gray-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <!-- Search &amp; filter bar -->
+      <!-- Search & filter bar -->
       <div class="flex flex-col sm:flex-row gap-4 mb-10">
         <div class="relative flex-1">
           <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-          <input type="text" placeholder="Search articles..." class="calc-input w-full pl-11 pr-4 py-3 text-sm" id="blog-search" oninput="filterBlog()"/>
+          <input type="text" placeholder="Search articles..." class="calc-input w-full pl-11 pr-4 py-3 text-sm" id="blog-search" oninput="filterBlog()" />
         </div>
         <div class="flex gap-2 flex-wrap">
           <select id="blog-cat-select" class="calc-input px-3 py-3 text-sm appearance-none" onchange="filterBlog()">
@@ -1277,7 +1420,7 @@
               <span class="text-xs text-gray-400">June 28, 2026</span>
             </div>
             <h2 class="font-display font-800 text-2xl text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 transition-colors">Mortgage Rates Drop to 18-Month Low — What Homebuyers Should Do Now</h2>
-            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">The 30-year fixed-rate mortgage averaged 6.65% this week, the lowest since December 2024. Here&#39;s what this means for buyers who&#39;ve been waiting on the sidelines, and the steps you should take before rates potentially reverse.</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">The 30-year fixed-rate mortgage averaged 6.65% this week, the lowest since December 2024. Here's what this means for buyers who've been waiting on the sidelines, and the steps you should take before rates potentially reverse.</p>
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-full bg-primary-600 flex items-center justify-center text-white text-xs font-700">JM</div>
@@ -1350,7 +1493,7 @@
           <div class="p-5">
             <div class="flex items-center gap-2 mb-3"><span class="badge badge-rose">Buying Tips</span><span class="text-xs text-gray-400">Jun 10, 2026</span></div>
             <h3 class="font-700 text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 transition-colors text-sm leading-snug">Down Payment Assistance Programs: $15k+ Available in These States</h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4">Many first-time buyers don&#39;t know free money exists for their down payment. We catalog the top state, local, and national assistance programs available in 2026.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4">Many first-time buyers don't know free money exists for their down payment. We catalog the top state, local, and national assistance programs available in 2026.</p>
             <div class="flex items-center justify-between"><div class="flex items-center gap-2 text-xs text-gray-400"><span><i class="fa-solid fa-clock mr-1"></i>6 min</span><span><i class="fa-solid fa-eye mr-1"></i>11.5k</span></div><button class="text-xs font-600 text-primary-600 flex items-center gap-1 hover:gap-2 transition-all">Read More <i class="fa-solid fa-arrow-right text-xs"></i></button></div>
           </div>
         </div>
@@ -1421,22 +1564,22 @@
 
       <!-- Topics -->
       <div class="mt-16 grid sm:grid-cols-4 gap-4">
-        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById(&#39;blog-cat-select&#39;).value=&#39;market&#39;;filterBlog()">
+        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById('blog-cat-select').value='market';filterBlog()">
           <div class="w-10 h-10 mx-auto rounded-xl stat-blue flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-chart-line text-white"></i></div>
           <div class="font-700 text-gray-900 dark:text-white text-sm">Market News</div>
           <div class="text-xs text-gray-400 mt-1">24 articles</div>
         </div>
-        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById(&#39;blog-cat-select&#39;).value=&#39;tips&#39;;filterBlog()">
+        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById('blog-cat-select').value='tips';filterBlog()">
           <div class="w-10 h-10 mx-auto rounded-xl stat-emerald flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-lightbulb text-white"></i></div>
           <div class="font-700 text-gray-900 dark:text-white text-sm">Buying Tips</div>
           <div class="text-xs text-gray-400 mt-1">31 articles</div>
         </div>
-        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById(&#39;blog-cat-select&#39;).value=&#39;rates&#39;;filterBlog()">
+        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById('blog-cat-select').value='rates';filterBlog()">
           <div class="w-10 h-10 mx-auto rounded-xl stat-purple flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-percent text-white"></i></div>
           <div class="font-700 text-gray-900 dark:text-white text-sm">Rate Watch</div>
           <div class="text-xs text-gray-400 mt-1">18 articles</div>
         </div>
-        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById(&#39;blog-cat-select&#39;).value=&#39;finance&#39;;filterBlog()">
+        <div class="premium-card p-5 text-center group cursor-pointer" onclick="document.getElementById('blog-cat-select').value='finance';filterBlog()">
           <div class="w-10 h-10 mx-auto rounded-xl stat-amber flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-coins text-white"></i></div>
           <div class="font-700 text-gray-900 dark:text-white text-sm">Personal Finance</div>
           <div class="text-xs text-gray-400 mt-1">22 articles</div>
@@ -1458,7 +1601,7 @@
         </div>
         <p class="text-sm leading-relaxed mb-5">Free, accurate mortgage calculator trusted by millions of homebuyers across the US.</p>
         <form class="flex gap-2" onsubmit="return false">
-          <input type="email" placeholder="Your email" class="flex-1 px-3 py-2.5 text-sm bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-primary-600 focus:outline-none transition-colors"/>
+          <input type="email" placeholder="Your email" class="flex-1 px-3 py-2.5 text-sm bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:border-primary-600 focus:outline-none transition-colors" />
           <button type="submit" class="px-3 py-2.5 bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors"><i class="fa-solid fa-paper-plane text-white text-sm"></i></button>
         </form>
         <div class="flex gap-2 mt-4">
@@ -1481,10 +1624,10 @@
       <div>
         <h4 class="font-700 text-white text-sm mb-4">Resources</h4>
         <ul class="space-y-2.5 text-sm">
-          <li><a href="#" onclick="navigateTo(&#39;guides&#39;)" class="hover:text-primary-400 transition-colors cursor-pointer">Loan Guides</a></li>
-          <li><a href="#" onclick="navigateTo(&#39;blog&#39;)" class="hover:text-primary-400 transition-colors cursor-pointer">Blog</a></li>
-          <li><a href="#" onclick="navigateTo(&#39;home&#39;,&#39;faq&#39;)" class="hover:text-primary-400 transition-colors cursor-pointer">FAQ</a></li>
-          <li><a href="#" onclick="navigateTo(&#39;home&#39;,&#39;related&#39;)" class="hover:text-primary-400 transition-colors cursor-pointer">All Calculators</a></li>
+          <li><a href="#" onclick="navigateTo('guides')" class="hover:text-primary-400 transition-colors cursor-pointer">Loan Guides</a></li>
+          <li><a href="#" onclick="navigateTo('blog')" class="hover:text-primary-400 transition-colors cursor-pointer">Blog</a></li>
+          <li><a href="#" onclick="navigateTo('home','faq')" class="hover:text-primary-400 transition-colors cursor-pointer">FAQ</a></li>
+          <li><a href="#" onclick="navigateTo('home','related')" class="hover:text-primary-400 transition-colors cursor-pointer">All Calculators</a></li>
           <li><a href="#" class="hover:text-primary-400 transition-colors">Rate Alerts</a></li>
         </ul>
       </div>
@@ -1515,6 +1658,112 @@
 <!-- ============================================================ -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ============================================================
+  // CALCULATOR HUB
+  // ============================================================
+  const CALCULATORS = [
+    { name:'Mortgage Calculator',      short:'Mortgage',         icon:'fa-calculator',           color:'#0F62FE', bg:'rgba(15,98,254,0.1)',   page:'home',         anchor:'calculator',    tag:'basic' },
+    { name:'Affordability Calculator', short:'Affordability',    icon:'fa-house',                 color:'#059669', bg:'rgba(5,150,105,0.1)',   page:'affordability', anchor:null,           tag:'basic' },
+    { name:'Refinance Calculator',     short:'Refinance',        icon:'fa-rotate',                color:'#7c3aed', bg:'rgba(124,58,237,0.1)',  page:'refinance',    anchor:null,            tag:'basic' },
+    { name:'Amortization Schedule',    short:'Amortization',     icon:'fa-table-list',            color:'#0891b2', bg:'rgba(8,145,178,0.1)',   page:'home',         anchor:'amortization',  tag:'basic' },
+    { name:'Extra Payment Calculator', short:'Extra Payment',    icon:'fa-circle-plus',           color:'#d97706', bg:'rgba(217,119,6,0.1)',   page:'home',         anchor:'calculator',    tag:'savings' },
+    { name:'Loan Comparison',          short:'Loan Compare',     icon:'fa-scale-balanced',        color:'#e11d48', bg:'rgba(225,29,72,0.1)',   page:'home',         anchor:'related',       tag:'compare' },
+    { name:'Rent vs Buy',              short:'Rent vs Buy',      icon:'fa-house-circle-check',    color:'#0d9488', bg:'rgba(13,148,136,0.1)',  page:'home',         anchor:'related',       tag:'compare' },
+    { name:'FHA Loan Calculator',      short:'FHA Loan',         icon:'fa-building',              color:'#4f46e5', bg:'rgba(79,70,229,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
+    { name:'VA Loan Calculator',       short:'VA Loan',          icon:'fa-medal',                 color:'#ea580c', bg:'rgba(234,88,12,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
+    { name:'USDA Loan Calculator',     short:'USDA Loan',        icon:'fa-leaf',                  color:'#16a34a', bg:'rgba(22,163,74,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
+    { name:'ARM Calculator',           short:'ARM',              icon:'fa-chart-line',            color:'#0284c7', bg:'rgba(2,132,199,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
+    { name:'Biweekly Payment',         short:'Biweekly',         icon:'fa-calendar-week',         color:'#db2777', bg:'rgba(219,39,119,0.1)',  page:'home',         anchor:'calculator',    tag:'savings' },
+    { name:'Interest Only Calculator', short:'Interest Only',    icon:'fa-percent',               color:'#7c3aed', bg:'rgba(124,58,237,0.1)',  page:'home',         anchor:'calculator',    tag:'loan' },
+    { name:'Property Tax Calculator',  short:'Property Tax',     icon:'fa-building-columns',      color:'#b45309', bg:'rgba(180,83,9,0.1)',    page:'home',         anchor:'calculator',    tag:'tax' },
+    { name:'PMI Calculator',           short:'PMI',              icon:'fa-umbrella',              color:'#0891b2', bg:'rgba(8,145,178,0.1)',   page:'home',         anchor:'calculator',    tag:'tax' },
+    { name:'Home Equity Calculator',   short:'Home Equity',      icon:'fa-house-crack',           color:'#059669', bg:'rgba(5,150,105,0.1)',   page:'home',         anchor:'calculator',    tag:'equity' },
+    { name:'Debt-to-Income (DTI)',      short:'DTI Ratio',        icon:'fa-gauge-high',            color:'#e11d48', bg:'rgba(225,29,72,0.1)',   page:'affordability', anchor:null,           tag:'basic' },
+    { name:'Closing Cost Calculator',  short:'Closing Costs',    icon:'fa-file-signature',        color:'#0F62FE', bg:'rgba(15,98,254,0.1)',   page:'home',         anchor:'calculator',    tag:'tax' },
+  ];
+
+  let calcHubOpen = false;
+
+  function buildHubGrid(containerId, searchVal, isMobile) {
+    const container = document.getElementById(containerId);
+    const noResults = document.getElementById(containerId.replace('grid','no-results'));
+    const q = (searchVal||'').toLowerCase().trim();
+    const filtered = CALCULATORS.filter(c => !q || c.name.toLowerCase().includes(q) || c.tag.includes(q));
+    if (filtered.length === 0) {
+      container.innerHTML = ''; noResults.classList.remove('hidden'); return;
+    }
+    noResults.classList.add('hidden');
+    container.innerHTML = filtered.map(c => {
+      const isActive = (c.page === currentPage || (currentPage==='home' && c.page==='home'));
+      return `<div class="calc-hub-item p-3 ${isActive?'active-calc':''} flex flex-col items-start gap-2" onclick="hubNavigate('${c.page}','${c.anchor||''}');">
+        <div class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style="background:${c.bg}">
+          <i class="fa-solid ${c.icon} text-xs" style="color:${c.color}"></i>
+        </div>
+        <div>
+          <div class="text-xs font-700 text-gray-800 dark:text-gray-100 leading-tight">${isMobile ? c.short : c.name}</div>
+          ${isActive ? `<div class="text-xs text-primary-600 font-600 mt-0.5"><i class="fa-solid fa-circle-dot text-xs"></i> Active</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function openCalcHub() {
+    calcHubOpen = true;
+    const dropdown = document.getElementById('calc-hub-dropdown');
+    const mobileOverlay = document.getElementById('calc-hub-mobile-overlay');
+    const chevron = document.getElementById('hub-chevron');
+    const btn = document.getElementById('calc-hub-btn');
+    if (window.innerWidth >= 1024) {
+      dropdown.classList.add('open');
+      btn && btn.setAttribute('aria-expanded','true');
+      chevron && chevron.style.setProperty('transform','rotate(180deg)');
+    } else {
+      mobileOverlay.classList.add('open');
+    }
+    buildHubGrid('hub-grid-desktop', '', false);
+    buildHubGrid('hub-grid-mobile', '', true);
+  }
+
+  function closeCalcHub() {
+    calcHubOpen = false;
+    const dropdown = document.getElementById('calc-hub-dropdown');
+    const mobileOverlay = document.getElementById('calc-hub-mobile-overlay');
+    const chevron = document.getElementById('hub-chevron');
+    const btn = document.getElementById('calc-hub-btn');
+    dropdown.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    btn && btn.setAttribute('aria-expanded','false');
+    chevron && chevron.style.setProperty('transform','rotate(0deg)');
+  }
+
+  function hubNavigate(page, anchor) {
+    closeCalcHub();
+    setTimeout(() => navigateTo(page, anchor||undefined), 120);
+  }
+
+  // Hub button events
+  const hubBtn = document.getElementById('calc-hub-btn');
+  const hubMobileBtn = document.getElementById('calc-hub-mobile-btn');
+  if (hubBtn) hubBtn.addEventListener('click', (e) => { e.stopPropagation(); calcHubOpen ? closeCalcHub() : openCalcHub(); });
+  if (hubMobileBtn) hubMobileBtn.addEventListener('click', (e) => { e.stopPropagation(); openCalcHub(); });
+
+  // Close on outside click (desktop)
+  document.addEventListener('click', (e) => {
+    const wrapper = document.getElementById('calc-hub-wrapper');
+    if (calcHubOpen && wrapper && !wrapper.contains(e.target)) {
+      if (window.innerWidth >= 1024) closeCalcHub();
+    }
+  });
+
+  // Search inputs
+  const hubSearchDesktop = document.getElementById('hub-search-desktop');
+  const hubSearchMobile = document.getElementById('hub-search-mobile');
+  if (hubSearchDesktop) hubSearchDesktop.addEventListener('input', e => buildHubGrid('hub-grid-desktop', e.target.value, false));
+  if (hubSearchMobile) hubSearchMobile.addEventListener('input', e => buildHubGrid('hub-grid-mobile', e.target.value, true));
+
+  // Keyboard: close on Escape
+  document.addEventListener('keydown', e => { if (e.key==='Escape') closeCalcHub(); });
 
   // ---- Dark mode ----
   const darkToggle = document.getElementById('dark-toggle');
@@ -1971,6 +2220,9 @@ function filterBlog() {
   document.getElementById('blog-no-results').classList.toggle('hidden', anyVisible);
 }
 </script>
+<script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
+<script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
+</body>
 
 
-</body></html>
+</html>
