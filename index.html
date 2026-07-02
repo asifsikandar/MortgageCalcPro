@@ -1588,8 +1588,480 @@
   </div>
 </div><!-- end page-blog -->
 
+<!-- ============================= EXTRA PAYMENT PAGE ============================= -->
+<div id="page-extra-payment" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Extra Payment Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Extra Payment Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">See how extra payments can save thousands in interest and shorten your loan.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">Loan & Extra Payment Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Current Balance</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="ep-balance" value="280000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcExtraPayment()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="ep-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcExtraPayment()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Remaining Term</label><select id="ep-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcExtraPayment()"><option value="30" selected>30 Years</option><option value="20">20 Years</option><option value="15">15 Years</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Extra Monthly Payment</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="ep-extra" value="200" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcExtraPayment()"/></div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Interest Saved</div><div class="text-4xl font-display font-800" id="ep-saved">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Time Saved</div><div class="text-lg font-700" id="ep-time-saved">0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">New Payoff</div><div class="text-lg font-700" id="ep-new-payoff">—</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">Comparison</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Original Payment</span><span class="font-600 text-gray-800 dark:text-gray-200" id="ep-orig-payment">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">New Payment</span><span class="font-600 text-primary-600" id="ep-new-payment">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Original Total Interest</span><span class="font-600 text-rose-500" id="ep-orig-interest">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">New Total Interest</span><span class="font-600 text-emerald-600" id="ep-new-interest">$0</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Original Payoff</span><span class="font-600 text-gray-800 dark:text-gray-200" id="ep-orig-payoff">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
 
-<!-- ============================= SHARED FOOTER ============================= -->
+<!-- ============================= PMI PAGE ============================= -->
+<div id="page-pmi" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>PMI Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">PMI Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Calculate your Private Mortgage Insurance cost and find out when you can remove it.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">PMI Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Home Value</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="pmi-home-value" value="350000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcPMI()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Amount</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="pmi-loan" value="315000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcPMI()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">PMI Rate (%/yr)</label><div class="relative"><input type="number" id="pmi-rate" value="0.85" step="0.05" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcPMI()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="pmi-interest-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcPMI()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Term</label><select id="pmi-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcPMI()"><option value="30" selected>30 Years</option><option value="15">15 Years</option></select></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Monthly PMI</div><div class="text-4xl font-display font-800" id="pmi-monthly">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Annual PMI</div><div class="text-lg font-700" id="pmi-annual">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Total PMI Paid</div><div class="text-lg font-700" id="pmi-total">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">PMI Details</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Current LTV</span><span class="font-600 text-gray-800 dark:text-gray-200" id="pmi-ltv">0%</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">LTV to Remove PMI</span><span class="font-600 text-emerald-600">80%</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Equity Needed</span><span class="font-600 text-primary-600" id="pmi-equity-needed">$0</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Est. PMI Removal</span><span class="font-600 text-primary-600" id="pmi-removal-date">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= FHA PAGE ============================= -->
+<div id="page-fha" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>FHA Loan Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">FHA Loan Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Calculate your FHA loan payment including the required Mortgage Insurance Premium (MIP).</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">FHA Loan Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Purchase Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="fha-price" value="300000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcFHA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Down Payment (min 3.5%)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="fha-down" value="10500" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcFHA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="fha-rate" value="6.75" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcFHA()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Term</label><select id="fha-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcFHA()"><option value="30" selected>30 Years</option><option value="15">15 Years</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Property Tax (yr)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="fha-tax" value="3600" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcFHA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Home Insurance (yr)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="fha-ins" value="1200" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcFHA()"/></div></div>
+        </div>
+        <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-xs text-blue-700 dark:text-blue-400">FHA requires 1.75% Upfront MIP + 0.55% Annual MIP.</div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Total Monthly Payment</div><div class="text-4xl font-display font-800" id="fha-total-payment">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">P&amp;I + MIP</div><div class="text-lg font-700" id="fha-pi-mip">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Monthly MIP</div><div class="text-lg font-700" id="fha-monthly-mip">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">FHA Summary</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Base Loan</span><span class="font-600 text-gray-800 dark:text-gray-200" id="fha-base-loan">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Upfront MIP (1.75%)</span><span class="font-600 text-amber-600" id="fha-ufmip">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Total FHA Loan</span><span class="font-600 text-primary-600" id="fha-total-loan">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Down Payment %</span><span class="font-600 text-gray-800 dark:text-gray-200" id="fha-dp-pct">0%</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Total Interest</span><span class="font-600 text-rose-500" id="fha-total-int">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= VA PAGE ============================= -->
+<div id="page-va" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>VA Loan Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">VA Loan Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Eligible veterans can buy with 0% down — no PMI required.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">VA Loan Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Purchase Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="va-price" value="400000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcVA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Down Payment (optional)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="va-down" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcVA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="va-rate" value="6.25" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcVA()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Term</label><select id="va-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcVA()"><option value="30" selected>30 Years</option><option value="15">15 Years</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">VA Funding Fee</label><select id="va-funding-fee" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcVA()"><option value="2.15">2.15% – First Use (0% down)</option><option value="1.5">1.5% – First Use (5-9%)</option><option value="1.25">1.25% – First Use (10%+)</option><option value="3.3">3.3% – Subsequent Use</option><option value="0">0% – Exempt</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Property Tax (yr)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="va-tax" value="4800" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcVA()"/></div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Monthly Payment</div><div class="text-4xl font-display font-800" id="va-total-payment">$0</div><div class="text-xs text-white/60 mt-1">No PMI required</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">P&amp;I</div><div class="text-lg font-700" id="va-pi">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Funding Fee</div><div class="text-lg font-700" id="va-ff">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">VA Loan Summary</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Base Loan</span><span class="font-600 text-gray-800 dark:text-gray-200" id="va-base-loan">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">VA Funding Fee</span><span class="font-600 text-amber-600" id="va-funding-amount">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Total VA Loan</span><span class="font-600 text-primary-600" id="va-total-loan">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Total Interest</span><span class="font-600 text-rose-500" id="va-total-int">$0</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">PMI Cost</span><span class="font-600 text-emerald-600">$0 (None)</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= USDA PAGE ============================= -->
+<div id="page-usda" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>USDA Loan Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">USDA Loan Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Eligible rural buyers can purchase with 0% down payment.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">USDA Loan Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Purchase Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="usda-price" value="250000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcUSDA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Down Payment</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="usda-down" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcUSDA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="usda-rate" value="6.5" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcUSDA()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Term</label><select id="usda-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcUSDA()"><option value="30" selected>30 Years</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Property Tax (yr)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="usda-tax" value="2400" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcUSDA()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Home Insurance (yr)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="usda-ins" value="1000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcUSDA()"/></div></div>
+        </div>
+        <div class="mt-4 p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl text-xs text-emerald-700 dark:text-emerald-400">USDA: 1% Upfront Guarantee Fee + 0.35% Annual Fee.</div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Monthly Payment</div><div class="text-4xl font-display font-800" id="usda-total-payment">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">P&amp;I</div><div class="text-lg font-700" id="usda-pi">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Annual Fee/mo</div><div class="text-lg font-700" id="usda-annual-fee">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">USDA Summary</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Base Loan</span><span class="font-600 text-gray-800 dark:text-gray-200" id="usda-base-loan">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Upfront Guarantee (1%)</span><span class="font-600 text-amber-600" id="usda-ug-fee">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Total USDA Loan</span><span class="font-600 text-primary-600" id="usda-total-loan">$0</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Total Interest</span><span class="font-600 text-rose-500" id="usda-total-int">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= ARM PAGE ============================= -->
+<div id="page-arm" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>ARM Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">ARM Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Calculate Adjustable Rate Mortgage payments and payment scenarios after rate adjustments.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">ARM Loan Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Amount</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="arm-loan" value="350000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcARM()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">ARM Type</label><select id="arm-type" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcARM()"><option value="5">5/1 ARM</option><option value="7">7/1 ARM</option><option value="10">10/1 ARM</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Initial Rate</label><div class="relative"><input type="number" id="arm-init-rate" value="5.75" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcARM()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Fully Indexed Rate</label><div class="relative"><input type="number" id="arm-full-rate" value="7.5" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcARM()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Term</label><select id="arm-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcARM()"><option value="30" selected>30 Years</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Rate Cap Per Adj.</label><div class="relative"><input type="number" id="arm-cap" value="2" step="0.5" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcARM()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Initial Payment</div><div class="text-4xl font-display font-800" id="arm-init-payment">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Max Payment</div><div class="text-lg font-700" id="arm-max-payment">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Fully Indexed</div><div class="text-lg font-700" id="arm-full-payment">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">Payment Scenarios</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Fixed Period</span><span class="font-600 text-emerald-600" id="arm-fixed-pmt">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">After 1st Adjustment</span><span class="font-600 text-amber-600" id="arm-adj1-pmt">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">At Max Rate</span><span class="font-600 text-rose-500" id="arm-max-pmt">$0</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Risk Level</span><span class="font-600 text-gray-800 dark:text-gray-200" id="arm-risk">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= BIWEEKLY PAGE ============================= -->
+<div id="page-biweekly" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Biweekly Payment Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Biweekly Payment Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">26 half-payments per year = 13 full payments — saving thousands in interest.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">Loan Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Amount</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="bw-loan" value="300000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcBiweekly()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="bw-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcBiweekly()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Term</label><select id="bw-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcBiweekly()"><option value="30" selected>30 Years</option><option value="20">20 Years</option><option value="15">15 Years</option></select></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Biweekly Payment</div><div class="text-4xl font-display font-800" id="bw-biweekly-pmt">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Interest Saved</div><div class="text-lg font-700" id="bw-saved">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Years Saved</div><div class="text-lg font-700" id="bw-years-saved">0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">Comparison</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Monthly Payment</span><span class="font-600 text-gray-800 dark:text-gray-200" id="bw-monthly-pmt">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Monthly Total Interest</span><span class="font-600 text-rose-500" id="bw-monthly-int">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Biweekly Total Interest</span><span class="font-600 text-emerald-600" id="bw-biweekly-int">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Monthly Payoff</span><span class="font-600 text-gray-800 dark:text-gray-200" id="bw-monthly-payoff">—</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Biweekly Payoff</span><span class="font-600 text-primary-600" id="bw-biweekly-payoff">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= INTEREST ONLY PAGE ============================= -->
+<div id="page-interest-only" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Interest Only Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Interest Only Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Calculate interest-only payments and see the payment jump when principal repayment begins.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">Loan Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Amount</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="io-loan" value="500000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcInterestOnly()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="io-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcInterestOnly()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Only Period</label><select id="io-period" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcInterestOnly()"><option value="5">5 Years</option><option value="7">7 Years</option><option value="10" selected>10 Years</option></select></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Total Loan Term</label><select id="io-term" class="calc-input w-full px-3 py-2.5 text-sm appearance-none" onchange="calcInterestOnly()"><option value="30" selected>30 Years</option></select></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">IO Payment</div><div class="text-4xl font-display font-800" id="io-io-payment">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">After IO Period</div><div class="text-lg font-700" id="io-full-payment">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Payment Increase</div><div class="text-lg font-700" id="io-increase">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">Summary</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">IO Period Interest</span><span class="font-600 text-rose-500" id="io-period-int">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Fully Amortized Pmt</span><span class="font-600 text-gray-800 dark:text-gray-200" id="io-full-amort">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">IO Loan Total Interest</span><span class="font-600 text-rose-500" id="io-total-int">$0</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Conventional Total Int.</span><span class="font-600 text-emerald-600" id="io-conv-int">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= PROPERTY TAX PAGE ============================= -->
+<div id="page-property-tax" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Property Tax Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Property Tax Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Estimate your annual and monthly property tax based on home value and local tax rates.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">Property Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Assessed Home Value</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="pt-value" value="350000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcPropertyTax()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Tax Rate (%)</label><div class="relative"><input type="number" id="pt-rate" value="1.1" step="0.01" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcPropertyTax()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Homestead Exemption</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="pt-exemption" value="25000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcPropertyTax()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Assessment Ratio</label><div class="relative"><input type="number" id="pt-ratio" value="100" step="1" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcPropertyTax()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Annual Property Tax</div><div class="text-4xl font-display font-800" id="pt-annual">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Monthly (Escrow)</div><div class="text-lg font-700" id="pt-monthly">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Quarterly</div><div class="text-lg font-700" id="pt-quarterly">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">Tax Breakdown</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Assessed Value</span><span class="font-600 text-gray-800 dark:text-gray-200" id="pt-assessed">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">After Exemption</span><span class="font-600 text-primary-600" id="pt-after-exemption">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Effective Rate</span><span class="font-600 text-gray-800 dark:text-gray-200" id="pt-effective-rate">0%</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">10-Year Total</span><span class="font-600 text-rose-500" id="pt-10yr">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= HOME EQUITY PAGE ============================= -->
+<div id="page-home-equity" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Home Equity Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Home Equity Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Calculate your current home equity and how much you may be able to borrow against it.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">Property &amp; Loan Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Current Home Value</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="he-value" value="450000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcHomeEquity()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Remaining Mortgage Balance</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="he-balance" value="280000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcHomeEquity()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Other Liens / 2nd Mortgage</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="he-liens" value="0" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcHomeEquity()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Max LTV for HELOC (%)</label><div class="relative"><input type="number" id="he-ltv" value="85" step="1" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcHomeEquity()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Available Home Equity</div><div class="text-4xl font-display font-800" id="he-equity">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Max HELOC/HELOAN</div><div class="text-lg font-700" id="he-max-borrow">$0</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Current LTV</div><div class="text-lg font-700" id="he-current-ltv">0%</div></div></div></div>
+        <div class="premium-card p-5 space-y-2.5">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm">Equity Summary</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Home Value</span><span class="font-600 text-gray-800 dark:text-gray-200" id="he-home-val">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Total Debt</span><span class="font-600 text-rose-500" id="he-total-debt">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Equity %</span><span class="font-600 text-primary-600" id="he-equity-pct">0%</span></div>
+          <div class="mt-3"><div class="flex justify-between text-xs mb-1"><span class="text-gray-500">Equity vs Debt</span><span class="font-700" id="he-bar-label">0%</span></div><div class="h-3 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden flex"><div class="h-full bg-primary-600 transition-all duration-500" id="he-equity-bar" style="width:0%"></div><div class="h-full bg-rose-400 transition-all duration-500" id="he-debt-bar" style="width:100%"></div></div><div class="flex justify-between text-xs mt-1 text-gray-400"><span>Equity</span><span>Debt</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= RENT VS BUY PAGE ============================= -->
+<div id="page-rent-vs-buy" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Rent vs Buy</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Rent vs Buy Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Compare the true 5-year financial cost of renting versus buying a home.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-6 mb-8">
+      <div class="premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-4">Renting</h3>
+        <div class="space-y-3">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Monthly Rent</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="rvb-rent" value="2000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRentVsBuy()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Annual Rent Increase</label><div class="relative"><input type="number" id="rvb-rent-increase" value="3" step="0.5" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcRentVsBuy()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Renter's Insurance (yr)</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="rvb-renters-ins" value="300" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRentVsBuy()"/></div></div>
+        </div>
+      </div>
+      <div class="premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-4">Buying</h3>
+        <div class="space-y-3">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Purchase Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="rvb-price" value="350000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRentVsBuy()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Down Payment</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="rvb-down" value="70000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcRentVsBuy()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Interest Rate</label><div class="relative"><input type="number" id="rvb-rate" value="6.875" step="0.125" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcRentVsBuy()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Annual Appreciation</label><div class="relative"><input type="number" id="rvb-appreciation" value="3" step="0.5" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcRentVsBuy()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="result-highlight"><div class="text-sm text-white/80 mb-1">5-Year Rent Cost</div><div class="text-3xl font-display font-800" id="rvb-rent-total">$0</div></div>
+      <div class="premium-card p-6 text-center"><div class="text-sm text-gray-500 mb-1">5-Year Net Buy Cost</div><div class="text-3xl font-display font-800 text-primary-600" id="rvb-buy-total">$0</div><div class="text-xs text-gray-400 mt-1">After equity &amp; selling costs</div></div>
+      <div class="premium-card p-6 text-center"><div class="text-sm text-gray-500 mb-1">Verdict (5 Years)</div><div class="text-xl font-display font-800" id="rvb-verdict">—</div><div class="text-xs text-gray-400 mt-1" id="rvb-verdict-sub">Calculating...</div></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= CLOSING COST PAGE ============================= -->
+<div id="page-closing-cost" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Closing Cost Calculator</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Closing Cost Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Estimate your total closing costs — typically 2–5% of the purchase price.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 premium-card p-6">
+        <h3 class="font-700 text-gray-900 dark:text-white mb-5">Purchase Details</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Purchase Price</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="cc-price" value="350000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcClosingCost()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Loan Amount</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="cc-loan" value="280000" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcClosingCost()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Origination Fee (%)</label><div class="relative"><input type="number" id="cc-origination" value="1" step="0.25" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcClosingCost()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Home Inspection</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="cc-inspection" value="500" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcClosingCost()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Appraisal Fee</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="cc-appraisal" value="600" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcClosingCost()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Title Insurance</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="cc-title" value="1500" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcClosingCost()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Recording Fees</label><div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span><input type="number" id="cc-recording" value="250" class="calc-input w-full pl-8 pr-4 py-2.5 text-sm" oninput="calcClosingCost()"/></div></div>
+          <div><label class="block text-sm font-500 text-gray-700 dark:text-gray-300 mb-1.5">Transfer Tax (%)</label><div class="relative"><input type="number" id="cc-transfer-tax" value="0.5" step="0.1" class="calc-input w-full pl-4 pr-8 py-2.5 text-sm" oninput="calcClosingCost()"/><span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">%</span></div></div>
+        </div>
+      </div>
+      <div class="lg:col-span-2 space-y-4">
+        <div class="result-highlight"><div class="text-sm text-white/80 mb-1">Total Closing Costs</div><div class="text-4xl font-display font-800" id="cc-total">$0</div><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">% of Purchase</div><div class="text-lg font-700" id="cc-pct">0%</div></div><div class="bg-white/10 rounded-xl p-3"><div class="text-xs text-white/60 mb-1">Cash Needed</div><div class="text-lg font-700" id="cc-cash-needed">$0</div></div></div></div>
+        <div class="premium-card p-5 space-y-2">
+          <h4 class="font-700 text-gray-900 dark:text-white text-sm mb-2">Cost Breakdown</h4>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Origination Fee</span><span class="font-600 text-gray-800 dark:text-gray-200" id="cc-orig-amt">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Inspection + Appraisal</span><span class="font-600 text-gray-800 dark:text-gray-200" id="cc-insp-appr">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Title Insurance</span><span class="font-600 text-gray-800 dark:text-gray-200" id="cc-title-amt">$0</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Recording + Transfer</span><span class="font-600 text-gray-800 dark:text-gray-200" id="cc-rec-transfer">$0</span></div>
+          <div class="flex justify-between text-sm border-t border-gray-100 dark:border-gray-700 pt-2"><span class="text-gray-500">Prepaid Items (est.)</span><span class="font-600 text-primary-600" id="cc-prepaid">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ============================= LOAN COMPARISON PAGE ============================= -->
+<div id="page-loan-comparison" class="page">
+  <div class="hero-gradient py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+      <div class="flex items-center gap-2 text-white/60 text-sm mb-4"><span class="cursor-pointer hover:text-white" onclick="navigateTo('home')">Home</span><i class="fa-solid fa-chevron-right text-xs"></i><span>Loan Comparison</span></div>
+      <h1 class="font-display text-3xl sm:text-5xl font-800 mb-3">Loan Comparison Calculator</h1>
+      <p class="text-white/80 text-lg max-w-2xl">Compare up to 3 loan scenarios side-by-side to find the best option.</p>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0"><svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none"><path d="M0 50L1440 50L1440 10Q720 50 0 10Z" class="fill-white dark:fill-gray-950"/></svg></div>
+  </div>
+  <div class="py-16 bg-white dark:bg-gray-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid sm:grid-cols-3 gap-4 mb-8">
+      <div class="premium-card p-5"><div class="flex items-center gap-2 mb-4"><div class="w-7 h-7 rounded-lg bg-primary-600 flex items-center justify-center text-white text-xs font-800">A</div><h3 class="font-700 text-gray-900 dark:text-white text-sm">Loan A</h3></div><div class="space-y-3"><div><label class="block text-xs text-gray-500 mb-1">Loan Amount</label><div class="relative"><span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span><input type="number" id="lc-a-loan" value="300000" class="calc-input w-full pl-7 pr-3 py-2 text-sm" oninput="calcLoanComparison()"/></div></div><div><label class="block text-xs text-gray-500 mb-1">Rate</label><div class="relative"><input type="number" id="lc-a-rate" value="6.5" step="0.125" class="calc-input w-full pl-3 pr-7 py-2 text-sm" oninput="calcLoanComparison()"/><span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">%</span></div></div><div><label class="block text-xs text-gray-500 mb-1">Term</label><select id="lc-a-term" class="calc-input w-full px-3 py-2 text-sm appearance-none" onchange="calcLoanComparison()"><option value="30" selected>30 yr</option><option value="20">20 yr</option><option value="15">15 yr</option></select></div></div></div>
+      <div class="premium-card p-5"><div class="flex items-center gap-2 mb-4"><div class="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white text-xs font-800">B</div><h3 class="font-700 text-gray-900 dark:text-white text-sm">Loan B</h3></div><div class="space-y-3"><div><label class="block text-xs text-gray-500 mb-1">Loan Amount</label><div class="relative"><span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span><input type="number" id="lc-b-loan" value="300000" class="calc-input w-full pl-7 pr-3 py-2 text-sm" oninput="calcLoanComparison()"/></div></div><div><label class="block text-xs text-gray-500 mb-1">Rate</label><div class="relative"><input type="number" id="lc-b-rate" value="6.875" step="0.125" class="calc-input w-full pl-3 pr-7 py-2 text-sm" oninput="calcLoanComparison()"/><span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">%</span></div></div><div><label class="block text-xs text-gray-500 mb-1">Term</label><select id="lc-b-term" class="calc-input w-full px-3 py-2 text-sm appearance-none" onchange="calcLoanComparison()"><option value="30" selected>30 yr</option><option value="20">20 yr</option><option value="15">15 yr</option></select></div></div></div>
+      <div class="premium-card p-5"><div class="flex items-center gap-2 mb-4"><div class="w-7 h-7 rounded-lg bg-purple-600 flex items-center justify-center text-white text-xs font-800">C</div><h3 class="font-700 text-gray-900 dark:text-white text-sm">Loan C</h3></div><div class="space-y-3"><div><label class="block text-xs text-gray-500 mb-1">Loan Amount</label><div class="relative"><span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span><input type="number" id="lc-c-loan" value="300000" class="calc-input w-full pl-7 pr-3 py-2 text-sm" oninput="calcLoanComparison()"/></div></div><div><label class="block text-xs text-gray-500 mb-1">Rate</label><div class="relative"><input type="number" id="lc-c-rate" value="7.25" step="0.125" class="calc-input w-full pl-3 pr-7 py-2 text-sm" oninput="calcLoanComparison()"/><span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">%</span></div></div><div><label class="block text-xs text-gray-500 mb-1">Term</label><select id="lc-c-term" class="calc-input w-full px-3 py-2 text-sm appearance-none" onchange="calcLoanComparison()"><option value="30" selected>30 yr</option><option value="20">20 yr</option><option value="15">15 yr</option></select></div></div></div>
+    </div>
+    <div class="premium-card overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-gray-50 dark:bg-gray-800"><th class="text-left px-5 py-3 font-700 text-gray-600 dark:text-gray-400">Metric</th><th class="text-right px-5 py-3 font-700 text-primary-600">Loan A</th><th class="text-right px-5 py-3 font-700 text-emerald-600">Loan B</th><th class="text-right px-5 py-3 font-700 text-purple-600">Loan C</th></tr></thead>
+          <tbody>
+            <tr class="border-b border-gray-50 dark:border-gray-800"><td class="px-5 py-3 text-gray-500">Monthly Payment</td><td class="px-5 py-3 text-right font-700 text-gray-900 dark:text-white" id="lc-a-pmt">—</td><td class="px-5 py-3 text-right font-700 text-gray-900 dark:text-white" id="lc-b-pmt">—</td><td class="px-5 py-3 text-right font-700 text-gray-900 dark:text-white" id="lc-c-pmt">—</td></tr>
+            <tr class="border-b border-gray-50 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30"><td class="px-5 py-3 text-gray-500">Total Interest</td><td class="px-5 py-3 text-right font-600 text-rose-500" id="lc-a-int">—</td><td class="px-5 py-3 text-right font-600 text-rose-500" id="lc-b-int">—</td><td class="px-5 py-3 text-right font-600 text-rose-500" id="lc-c-int">—</td></tr>
+            <tr class="border-b border-gray-50 dark:border-gray-800"><td class="px-5 py-3 text-gray-500">Total Cost</td><td class="px-5 py-3 text-right font-600 text-gray-800 dark:text-gray-200" id="lc-a-cost">—</td><td class="px-5 py-3 text-right font-600 text-gray-800 dark:text-gray-200" id="lc-b-cost">—</td><td class="px-5 py-3 text-right font-600 text-gray-800 dark:text-gray-200" id="lc-c-cost">—</td></tr>
+            <tr class="border-b border-gray-50 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30"><td class="px-5 py-3 text-gray-500">Term</td><td class="px-5 py-3 text-right font-600 text-gray-800 dark:text-gray-200" id="lc-a-term-display">—</td><td class="px-5 py-3 text-right font-600 text-gray-800 dark:text-gray-200" id="lc-b-term-display">—</td><td class="px-5 py-3 text-right font-600 text-gray-800 dark:text-gray-200" id="lc-c-term-display">—</td></tr>
+            <tr><td class="px-5 py-3 text-gray-500">Best Choice?</td><td class="px-5 py-3 text-right" id="lc-a-best">—</td><td class="px-5 py-3 text-right" id="lc-b-best">—</td><td class="px-5 py-3 text-right" id="lc-c-best">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div></div>
+</div>
 <footer id="footer" class="bg-gray-950 text-gray-400">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
@@ -1662,24 +2134,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // CALCULATOR HUB
   // ============================================================
   const CALCULATORS = [
-    { name:'Mortgage Calculator',      short:'Mortgage',         icon:'fa-calculator',           color:'#0F62FE', bg:'rgba(15,98,254,0.1)',   page:'home',         anchor:'calculator',    tag:'basic' },
-    { name:'Affordability Calculator', short:'Affordability',    icon:'fa-house',                 color:'#059669', bg:'rgba(5,150,105,0.1)',   page:'affordability', anchor:null,           tag:'basic' },
-    { name:'Refinance Calculator',     short:'Refinance',        icon:'fa-rotate',                color:'#7c3aed', bg:'rgba(124,58,237,0.1)',  page:'refinance',    anchor:null,            tag:'basic' },
-    { name:'Amortization Schedule',    short:'Amortization',     icon:'fa-table-list',            color:'#0891b2', bg:'rgba(8,145,178,0.1)',   page:'home',         anchor:'amortization',  tag:'basic' },
-    { name:'Extra Payment Calculator', short:'Extra Payment',    icon:'fa-circle-plus',           color:'#d97706', bg:'rgba(217,119,6,0.1)',   page:'home',         anchor:'calculator',    tag:'savings' },
-    { name:'Loan Comparison',          short:'Loan Compare',     icon:'fa-scale-balanced',        color:'#e11d48', bg:'rgba(225,29,72,0.1)',   page:'home',         anchor:'related',       tag:'compare' },
-    { name:'Rent vs Buy',              short:'Rent vs Buy',      icon:'fa-house-circle-check',    color:'#0d9488', bg:'rgba(13,148,136,0.1)',  page:'home',         anchor:'related',       tag:'compare' },
-    { name:'FHA Loan Calculator',      short:'FHA Loan',         icon:'fa-building',              color:'#4f46e5', bg:'rgba(79,70,229,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
-    { name:'VA Loan Calculator',       short:'VA Loan',          icon:'fa-medal',                 color:'#ea580c', bg:'rgba(234,88,12,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
-    { name:'USDA Loan Calculator',     short:'USDA Loan',        icon:'fa-leaf',                  color:'#16a34a', bg:'rgba(22,163,74,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
-    { name:'ARM Calculator',           short:'ARM',              icon:'fa-chart-line',            color:'#0284c7', bg:'rgba(2,132,199,0.1)',   page:'home',         anchor:'calculator',    tag:'loan' },
-    { name:'Biweekly Payment',         short:'Biweekly',         icon:'fa-calendar-week',         color:'#db2777', bg:'rgba(219,39,119,0.1)',  page:'home',         anchor:'calculator',    tag:'savings' },
-    { name:'Interest Only Calculator', short:'Interest Only',    icon:'fa-percent',               color:'#7c3aed', bg:'rgba(124,58,237,0.1)',  page:'home',         anchor:'calculator',    tag:'loan' },
-    { name:'Property Tax Calculator',  short:'Property Tax',     icon:'fa-building-columns',      color:'#b45309', bg:'rgba(180,83,9,0.1)',    page:'home',         anchor:'calculator',    tag:'tax' },
-    { name:'PMI Calculator',           short:'PMI',              icon:'fa-umbrella',              color:'#0891b2', bg:'rgba(8,145,178,0.1)',   page:'home',         anchor:'calculator',    tag:'tax' },
-    { name:'Home Equity Calculator',   short:'Home Equity',      icon:'fa-house-crack',           color:'#059669', bg:'rgba(5,150,105,0.1)',   page:'home',         anchor:'calculator',    tag:'equity' },
-    { name:'Debt-to-Income (DTI)',      short:'DTI Ratio',        icon:'fa-gauge-high',            color:'#e11d48', bg:'rgba(225,29,72,0.1)',   page:'affordability', anchor:null,           tag:'basic' },
-    { name:'Closing Cost Calculator',  short:'Closing Costs',    icon:'fa-file-signature',        color:'#0F62FE', bg:'rgba(15,98,254,0.1)',   page:'home',         anchor:'calculator',    tag:'tax' },
+    { name:'Mortgage Calculator',      short:'Mortgage',         icon:'fa-calculator',           color:'#0F62FE', bg:'rgba(15,98,254,0.1)',   page:'home',              anchor:'calculator',    tag:'basic' },
+    { name:'Affordability Calculator', short:'Affordability',    icon:'fa-house',                 color:'#059669', bg:'rgba(5,150,105,0.1)',   page:'affordability',     anchor:null,            tag:'basic' },
+    { name:'Refinance Calculator',     short:'Refinance',        icon:'fa-rotate',                color:'#7c3aed', bg:'rgba(124,58,237,0.1)',  page:'refinance',         anchor:null,            tag:'basic' },
+    { name:'Amortization Schedule',    short:'Amortization',     icon:'fa-table-list',            color:'#0891b2', bg:'rgba(8,145,178,0.1)',   page:'home',              anchor:'amortization',  tag:'basic' },
+    { name:'Extra Payment Calculator', short:'Extra Payment',    icon:'fa-circle-plus',           color:'#d97706', bg:'rgba(217,119,6,0.1)',   page:'extra-payment',     anchor:null,            tag:'savings' },
+    { name:'Loan Comparison',          short:'Loan Compare',     icon:'fa-scale-balanced',        color:'#e11d48', bg:'rgba(225,29,72,0.1)',   page:'loan-comparison',   anchor:null,            tag:'compare' },
+    { name:'Rent vs Buy',              short:'Rent vs Buy',      icon:'fa-house-circle-check',    color:'#0d9488', bg:'rgba(13,148,136,0.1)',  page:'rent-vs-buy',       anchor:null,            tag:'compare' },
+    { name:'FHA Loan Calculator',      short:'FHA Loan',         icon:'fa-building',              color:'#4f46e5', bg:'rgba(79,70,229,0.1)',   page:'fha',               anchor:null,            tag:'loan' },
+    { name:'VA Loan Calculator',       short:'VA Loan',          icon:'fa-medal',                 color:'#ea580c', bg:'rgba(234,88,12,0.1)',   page:'va',                anchor:null,            tag:'loan' },
+    { name:'USDA Loan Calculator',     short:'USDA Loan',        icon:'fa-leaf',                  color:'#16a34a', bg:'rgba(22,163,74,0.1)',   page:'usda',              anchor:null,            tag:'loan' },
+    { name:'ARM Calculator',           short:'ARM',              icon:'fa-chart-line',            color:'#0284c7', bg:'rgba(2,132,199,0.1)',   page:'arm',               anchor:null,            tag:'loan' },
+    { name:'Biweekly Payment',         short:'Biweekly',         icon:'fa-calendar-week',         color:'#db2777', bg:'rgba(219,39,119,0.1)',  page:'biweekly',          anchor:null,            tag:'savings' },
+    { name:'Interest Only Calculator', short:'Interest Only',    icon:'fa-percent',               color:'#7c3aed', bg:'rgba(124,58,237,0.1)',  page:'interest-only',     anchor:null,            tag:'loan' },
+    { name:'Property Tax Calculator',  short:'Property Tax',     icon:'fa-building-columns',      color:'#b45309', bg:'rgba(180,83,9,0.1)',    page:'property-tax',      anchor:null,            tag:'tax' },
+    { name:'PMI Calculator',           short:'PMI',              icon:'fa-umbrella',              color:'#0891b2', bg:'rgba(8,145,178,0.1)',   page:'pmi',               anchor:null,            tag:'tax' },
+    { name:'Home Equity Calculator',   short:'Home Equity',      icon:'fa-house-crack',           color:'#059669', bg:'rgba(5,150,105,0.1)',   page:'home-equity',       anchor:null,            tag:'equity' },
+    { name:'Debt-to-Income (DTI)',      short:'DTI Ratio',        icon:'fa-gauge-high',            color:'#e11d48', bg:'rgba(225,29,72,0.1)',   page:'affordability',     anchor:null,            tag:'basic' },
+    { name:'Closing Cost Calculator',  short:'Closing Costs',    icon:'fa-file-signature',        color:'#0F62FE', bg:'rgba(15,98,254,0.1)',   page:'closing-cost',      anchor:null,            tag:'tax' },
   ];
 
   let calcHubOpen = false;
@@ -2217,6 +2689,21 @@ function calcAffordability() {
   });
 }
 
+// New Calculator Functions
+function calcExtraPayment(){const b=parseFloat(document.getElementById('ep-balance').value)||280000,r=parseFloat(document.getElementById('ep-rate').value)||6.875,ty=parseInt(document.getElementById('ep-term').value)||30,ex=parseFloat(document.getElementById('ep-extra').value)||0,mr=r/100/12,n=ty*12,op=mr===0?b/n:b*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1),oi=op*n-b;let bal=b,m=0,ni=0;while(bal>0.01&&m<n*2){const ip=bal*mr;ni+=ip;bal=Math.max(0,bal-(op+ex-ip));m++;if(m>1500)break;}const d1=new Date();d1.setMonth(d1.getMonth()+m);const d2=new Date();d2.setMonth(d2.getMonth()+n);document.getElementById('ep-saved').textContent=fmt(Math.max(0,oi-ni));document.getElementById('ep-time-saved').textContent=n-m>0?Math.floor((n-m)/12)+'y '+(n-m)%12+'m':'0';document.getElementById('ep-new-payoff').textContent=d1.toLocaleDateString('en-US',{month:'short',year:'numeric'});document.getElementById('ep-orig-payment').textContent=fmt(op);document.getElementById('ep-new-payment').textContent=fmt(op+ex);document.getElementById('ep-orig-interest').textContent=fmt(oi);document.getElementById('ep-new-interest').textContent=fmt(Math.max(0,ni));document.getElementById('ep-orig-payoff').textContent=d2.toLocaleDateString('en-US',{month:'short',year:'numeric'});}
+function calcPMI(){const hv=parseFloat(document.getElementById('pmi-home-value').value)||350000,la=parseFloat(document.getElementById('pmi-loan').value)||315000,pr=parseFloat(document.getElementById('pmi-rate').value)||0.85,ir=parseFloat(document.getElementById('pmi-interest-rate').value)||6.875,ty=parseInt(document.getElementById('pmi-term').value)||30,mP=la*pr/100/12,aP=la*pr/100,t80=hv*.8,en=Math.max(0,la-t80),mr=ir/100/12,n=ty*12,pmt=mr===0?la/n:la*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);let bal=la,mo=0;while(bal>t80&&mo<n){bal=Math.max(0,bal-(pmt-bal*mr));mo++;}const rd=new Date();rd.setMonth(rd.getMonth()+mo);document.getElementById('pmi-monthly').textContent=fmt(mP);document.getElementById('pmi-annual').textContent=fmt(aP);document.getElementById('pmi-total').textContent=fmt(mP*mo);document.getElementById('pmi-ltv').textContent=(hv>0?la/hv*100:0).toFixed(1)+'%';document.getElementById('pmi-equity-needed').textContent=fmt(en);document.getElementById('pmi-removal-date').textContent=mo<n?rd.toLocaleDateString('en-US',{month:'short',year:'numeric'}):'N/A';}
+function calcFHA(){const p=parseFloat(document.getElementById('fha-price').value)||300000,d=parseFloat(document.getElementById('fha-down').value)||10500,r=parseFloat(document.getElementById('fha-rate').value)||6.75,ty=parseInt(document.getElementById('fha-term').value)||30,tx=parseFloat(document.getElementById('fha-tax').value)||3600,ins=parseFloat(document.getElementById('fha-ins').value)||1200,bl=Math.max(0,p-d),uf=bl*.0175,tl=bl+uf,mip=tl*.0055/12,mr=r/100/12,n=ty*12,pi=mr===0?tl/n:tl*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);document.getElementById('fha-total-payment').textContent=fmt(pi+tx/12+ins/12+mip);document.getElementById('fha-pi-mip').textContent=fmt(pi+mip);document.getElementById('fha-monthly-mip').textContent=fmt(mip);document.getElementById('fha-base-loan').textContent=fmt(bl);document.getElementById('fha-ufmip').textContent=fmt(uf);document.getElementById('fha-total-loan').textContent=fmt(tl);document.getElementById('fha-dp-pct').textContent=p>0?(d/p*100).toFixed(1)+'%':'0%';document.getElementById('fha-total-int').textContent=fmt(Math.max(0,pi*n-tl));}
+function calcVA(){const p=parseFloat(document.getElementById('va-price').value)||400000,d=parseFloat(document.getElementById('va-down').value)||0,r=parseFloat(document.getElementById('va-rate').value)||6.25,ty=parseInt(document.getElementById('va-term').value)||30,tx=parseFloat(document.getElementById('va-tax').value)||4800,ffP=parseFloat(document.getElementById('va-funding-fee').value)||2.15,bl=Math.max(0,p-d),ff=bl*ffP/100,tl=bl+ff,mr=r/100/12,n=ty*12,pi=mr===0?tl/n:tl*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);document.getElementById('va-total-payment').textContent=fmt(pi+tx/12);document.getElementById('va-pi').textContent=fmt(pi);document.getElementById('va-ff').textContent=fmt(ff);document.getElementById('va-base-loan').textContent=fmt(bl);document.getElementById('va-funding-amount').textContent=fmt(ff);document.getElementById('va-total-loan').textContent=fmt(tl);document.getElementById('va-total-int').textContent=fmt(Math.max(0,pi*n-tl));}
+function calcUSDA(){const p=parseFloat(document.getElementById('usda-price').value)||250000,d=parseFloat(document.getElementById('usda-down').value)||0,r=parseFloat(document.getElementById('usda-rate').value)||6.5,ty=parseInt(document.getElementById('usda-term').value)||30,tx=parseFloat(document.getElementById('usda-tax').value)||2400,ins=parseFloat(document.getElementById('usda-ins').value)||1000,bl=Math.max(0,p-d),ug=bl*.01,tl=bl+ug,af=tl*.0035/12,mr=r/100/12,n=ty*12,pi=mr===0?tl/n:tl*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);document.getElementById('usda-total-payment').textContent=fmt(pi+tx/12+ins/12+af);document.getElementById('usda-pi').textContent=fmt(pi);document.getElementById('usda-annual-fee').textContent=fmt(af);document.getElementById('usda-base-loan').textContent=fmt(bl);document.getElementById('usda-ug-fee').textContent=fmt(ug);document.getElementById('usda-total-loan').textContent=fmt(tl);document.getElementById('usda-total-int').textContent=fmt(Math.max(0,pi*n-tl));}
+function calcARM(){const L=parseFloat(document.getElementById('arm-loan').value)||350000,fy=parseInt(document.getElementById('arm-type').value)||5,ir=parseFloat(document.getElementById('arm-init-rate').value)||5.75,fr=parseFloat(document.getElementById('arm-full-rate').value)||7.5,ty=parseInt(document.getElementById('arm-term').value)||30,cap=parseFloat(document.getElementById('arm-cap').value)||2,n=ty*12,cp=(p,rt,m)=>{const mr=rt/100/12;return mr===0?p/m:p*(mr*Math.pow(1+mr,m))/(Math.pow(1+mr,m)-1);},iP=cp(L,ir,n),fP=cp(L,fr,n),fN=fy*12,mr=ir/100/12;let bal=L;for(let i=0;i<fN;i++){bal=Math.max(0,bal-(iP-bal*mr));}const rN=n-fN,a1=cp(bal,Math.min(ir+cap,fr),rN),mx=cp(bal,Math.min(ir+cap*3,fr+2),rN);document.getElementById('arm-init-payment').textContent=fmt(iP);document.getElementById('arm-max-payment').textContent=fmt(mx);document.getElementById('arm-full-payment').textContent=fmt(fP);document.getElementById('arm-fixed-pmt').textContent=fmt(iP);document.getElementById('arm-adj1-pmt').textContent=fmt(a1);document.getElementById('arm-max-pmt').textContent=fmt(mx);document.getElementById('arm-risk').textContent=(fr-ir>2?'High':fr-ir>1?'Moderate':'Low')+' Risk';}
+function calcBiweekly(){const L=parseFloat(document.getElementById('bw-loan').value)||300000,r=parseFloat(document.getElementById('bw-rate').value)||6.875,ty=parseInt(document.getElementById('bw-term').value)||30,mr=r/100/12,n=ty*12,mp=mr===0?L/n:L*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1),mi=mp*n-L,bw=mp/2,ex=bw*26/12-mp;let bal=L,mo=0,bi=0;while(bal>0.01&&mo<n){const ip=bal*mr;bi+=ip;bal=Math.max(0,bal-(mp+ex-ip));mo++;}const d1=new Date();d1.setFullYear(d1.getFullYear()+ty);const d2=new Date();d2.setMonth(d2.getMonth()+mo);document.getElementById('bw-biweekly-pmt').textContent=fmt(bw);document.getElementById('bw-saved').textContent=fmt(Math.max(0,mi-bi));document.getElementById('bw-years-saved').textContent=Math.max(0,(n-mo)/12).toFixed(1)+' yrs';document.getElementById('bw-monthly-pmt').textContent=fmt(mp);document.getElementById('bw-monthly-int').textContent=fmt(mi);document.getElementById('bw-biweekly-int').textContent=fmt(Math.max(0,bi));document.getElementById('bw-monthly-payoff').textContent=d1.toLocaleDateString('en-US',{month:'short',year:'numeric'});document.getElementById('bw-biweekly-payoff').textContent=d2.toLocaleDateString('en-US',{month:'short',year:'numeric'});}
+function calcInterestOnly(){const L=parseFloat(document.getElementById('io-loan').value)||500000,r=parseFloat(document.getElementById('io-rate').value)||6.875,ip=parseInt(document.getElementById('io-period').value)||10,ty=parseInt(document.getElementById('io-term').value)||30,mr=r/100/12,iop=L*mr,ipi=iop*ip*12,rN=(ty-ip)*12,fp=rN>0?(mr===0?L/rN:L*(mr*Math.pow(1+mr,rN))/(Math.pow(1+mr,rN)-1)):0,cN=ty*12,cp=mr===0?L/cN:L*(mr*Math.pow(1+mr,cN))/(Math.pow(1+mr,cN)-1);document.getElementById('io-io-payment').textContent=fmt(iop);document.getElementById('io-full-payment').textContent=fmt(fp);document.getElementById('io-increase').textContent=fmt(Math.max(0,fp-iop));document.getElementById('io-period-int').textContent=fmt(ipi);document.getElementById('io-full-amort').textContent=fmt(cp);document.getElementById('io-total-int').textContent=fmt(Math.max(0,ipi+fp*rN-L));document.getElementById('io-conv-int').textContent=fmt(cp*cN-L);}
+function calcPropertyTax(){const v=parseFloat(document.getElementById('pt-value').value)||350000,tr=parseFloat(document.getElementById('pt-rate').value)||1.1,ex=parseFloat(document.getElementById('pt-exemption').value)||25000,ra=parseFloat(document.getElementById('pt-ratio').value)||100,as=v*(ra/100),ae=Math.max(0,as-ex),an=ae*tr/100;document.getElementById('pt-annual').textContent=fmt(an);document.getElementById('pt-monthly').textContent=fmt(an/12);document.getElementById('pt-quarterly').textContent=fmt(an/4);document.getElementById('pt-assessed').textContent=fmt(as);document.getElementById('pt-after-exemption').textContent=fmt(ae);document.getElementById('pt-effective-rate').textContent=(v>0?an/v*100:0).toFixed(3)+'%';document.getElementById('pt-10yr').textContent=fmt(an*10);}
+function calcHomeEquity(){const hv=parseFloat(document.getElementById('he-value').value)||450000,bl=parseFloat(document.getElementById('he-balance').value)||280000,li=parseFloat(document.getElementById('he-liens').value)||0,ml=parseFloat(document.getElementById('he-ltv').value)||85,td=bl+li,eq=Math.max(0,hv-td),cl=hv>0?td/hv*100:0,mb=Math.max(0,hv*(ml/100)-td),ep=hv>0?eq/hv*100:0;document.getElementById('he-equity').textContent=fmt(eq);document.getElementById('he-max-borrow').textContent=fmt(mb);document.getElementById('he-current-ltv').textContent=cl.toFixed(1)+'%';document.getElementById('he-home-val').textContent=fmt(hv);document.getElementById('he-total-debt').textContent=fmt(td);document.getElementById('he-equity-pct').textContent=ep.toFixed(1)+'%';document.getElementById('he-bar-label').textContent=ep.toFixed(0)+'% equity';document.getElementById('he-equity-bar').style.width=Math.min(100,ep)+'%';document.getElementById('he-debt-bar').style.width=Math.min(100,100-ep)+'%';}
+function calcRentVsBuy(){const rt=parseFloat(document.getElementById('rvb-rent').value)||2000,ri=parseFloat(document.getElementById('rvb-rent-increase').value)||3,ri2=parseFloat(document.getElementById('rvb-renters-ins').value)||300,pr=parseFloat(document.getElementById('rvb-price').value)||350000,dn=parseFloat(document.getElementById('rvb-down').value)||70000,ra=parseFloat(document.getElementById('rvb-rate').value)||6.875,ap=parseFloat(document.getElementById('rvb-appreciation').value)||3;let rT=0,cr=rt;for(let y=0;y<5;y++){rT+=cr*12+ri2;cr*=(1+ri/100);}const la=pr-dn,n=360,mr=ra/100/12,pi=mr===0?la/n:la*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);let bal=la,bT=dn+pr*.03;for(let m=0;m<60;m++){const ip=bal*mr;bal=Math.max(0,bal-(pi-ip));bT+=pi;}const hva=pr*Math.pow(1+ap/100,5),nbc=bT-(hva-bal)+pr*.06,ch=rT<nbc?'Renting':'Buying',df=Math.abs(rT-nbc);document.getElementById('rvb-rent-total').textContent=fmt(rT);document.getElementById('rvb-buy-total').textContent=fmt(Math.max(0,nbc));const el=document.getElementById('rvb-verdict');el.textContent=ch+' wins';el.className='text-xl font-display font-800 '+(ch==='Buying'?'text-emerald-600':'text-primary-600');document.getElementById('rvb-verdict-sub').textContent='By '+fmt(df)+' over 5 years';}
+function calcClosingCost(){const pr=parseFloat(document.getElementById('cc-price').value)||350000,lo=parseFloat(document.getElementById('cc-loan').value)||280000,op=parseFloat(document.getElementById('cc-origination').value)||1,ins=parseFloat(document.getElementById('cc-inspection').value)||500,ap=parseFloat(document.getElementById('cc-appraisal').value)||600,ti=parseFloat(document.getElementById('cc-title').value)||1500,re=parseFloat(document.getElementById('cc-recording').value)||250,tt=parseFloat(document.getElementById('cc-transfer-tax').value)||0.5,oa=lo*op/100,t=pr*tt/100,pp=lo*.015,tot=oa+ins+ap+ti+re+t+pp;document.getElementById('cc-total').textContent=fmt(tot);document.getElementById('cc-pct').textContent=(pr>0?tot/pr*100:0).toFixed(1)+'%';document.getElementById('cc-cash-needed').textContent=fmt(tot+(pr-lo));document.getElementById('cc-orig-amt').textContent=fmt(oa);document.getElementById('cc-insp-appr').textContent=fmt(ins+ap);document.getElementById('cc-title-amt').textContent=fmt(ti);document.getElementById('cc-rec-transfer').textContent=fmt(re+t);document.getElementById('cc-prepaid').textContent=fmt(pp);}
+function calcLoanComparison(){const sc=[{l:'lc-a-loan',r:'lc-a-rate',t:'lc-a-term',p:'lc-a-pmt',i:'lc-a-int',c:'lc-a-cost',td:'lc-a-term-display',b:'lc-a-best'},{l:'lc-b-loan',r:'lc-b-rate',t:'lc-b-term',p:'lc-b-pmt',i:'lc-b-int',c:'lc-b-cost',td:'lc-b-term-display',b:'lc-b-best'},{l:'lc-c-loan',r:'lc-c-rate',t:'lc-c-term',p:'lc-c-pmt',i:'lc-c-int',c:'lc-c-cost',td:'lc-c-term-display',b:'lc-c-best'}];const res=sc.map(s=>{const la=parseFloat(document.getElementById(s.l).value)||300000,rt=parseFloat(document.getElementById(s.r).value)||6.5,ty=parseInt(document.getElementById(s.t).value)||30,n=ty*12,mr=rt/100/12,pm=mr===0?la/n:la*(mr*Math.pow(1+mr,n))/(Math.pow(1+mr,n)-1);return{...s,pm,ti:pm*n-la,tc:pm*n,ty};});const mi=Math.min(...res.map(r=>r.ti));res.forEach(r=>{document.getElementById(r.p).textContent=fmt(r.pm);document.getElementById(r.i).textContent=fmt(r.ti);document.getElementById(r.c).textContent=fmt(r.tc);document.getElementById(r.td).textContent=r.ty+' Years';const be=document.getElementById(r.b);be.innerHTML=r.ti===mi?'<span class="badge badge-green"><i class="fa-solid fa-trophy"></i> Best</span>':'—';});}
+
 // ============================================================
 // LOAN GUIDES FILTER
 // ============================================================
@@ -2251,7 +2738,9 @@ function filterBlog() {
 <script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
 <script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
 <script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
+<script>window.onload=function(){var d=document.createElement("div");d.id="appLoadFinished";document.body.appendChild(d);};</script>
 </body>
+
 
 
 
